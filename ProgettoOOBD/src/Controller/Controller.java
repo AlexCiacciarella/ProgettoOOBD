@@ -7,8 +7,8 @@ import MainWindow.MainWindow;
 
 public class Controller {
 	  //attributi
-	  LoginWindow login;
-      MainWindow main;     
+	  LoginWindow LoginWindow;
+      MainWindow MainWindow;     
       
       
       //metodi
@@ -17,37 +17,37 @@ public class Controller {
     	  
       }
       public void ShutLoginWindow() {
-     	  login.setVisible(false);
-     	  login.dispose();
+     	  LoginWindow.setVisible(false);
+     	  LoginWindow.dispose();
         }  
       
       public void MainWindowOn() {
-      	    main = new MainWindow(this,login.getProcuratoreTextField().getText());
-      	    main.setVisible(true);
+      	    MainWindow = new MainWindow(this,LoginWindow.getProcuratoreTextField().getText());
+      	    MainWindow.setVisible(true);
         }
 
       
        //costruttore
        public Controller() {
     	   
-    	   login = new LoginWindow(this);
-    	   login.setVisible(true);
+    	   LoginWindow = new LoginWindow(this);
+    	   LoginWindow.setVisible(true);
     	   
        }
    
        
        //getter e setter
        public LoginWindow getLogin() {
-   		return login;
+   		return LoginWindow;
    	}
    	   public void setLogin(LoginWindow login) {
-   		this.login = login;
+   		this.LoginWindow = login;
    	   }
    	   public MainWindow getMain() {
-   		return main;
+   		return MainWindow;
    	   }
    	   public void setMain(MainWindow main) {
-   		this.main = main;
+   		this.MainWindow = main;
    	   }
 
        
