@@ -61,8 +61,8 @@ public class LoginWindow extends JFrame {
 		JButton LoginButton = new JButton("Login");
 		LoginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			    LoginController.ShutLoginWindow();
-			    LoginController.MainWindowOn();
+			    //LoginController.ShutLoginWindow();
+			    //LoginController.MainWindowOn();
 			    String Procuratore = ProcuratoreTextField.getText();
 			}
 		});
