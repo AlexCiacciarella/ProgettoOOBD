@@ -22,7 +22,7 @@ import Controller.Controller;
 
 public class LoginWindow extends JFrame {
 	MainWindow driver;
-	Controller LoginController;
+	Controller Controller;
 	private JPanel MainContentPanel;
 	private JTextField ProcuratoreTextField;
 	private JPasswordField ProcuratorePasswordField;
@@ -31,7 +31,7 @@ public class LoginWindow extends JFrame {
 	
 	
 	public LoginWindow(Controller temp) {
-		LoginController = temp;
+		Controller = temp;
 		setFont(new Font("Arial", Font.PLAIN, 14));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 858, 478);
@@ -61,8 +61,6 @@ public class LoginWindow extends JFrame {
 		JButton LoginButton = new JButton("Login");
 		LoginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			    //LoginController.ShutLoginWindow();
-			    //LoginController.MainWindowOn();
 			    String Procuratore = ProcuratoreTextField.getText();
 			}
 		});

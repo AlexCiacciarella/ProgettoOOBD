@@ -18,15 +18,15 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 public class MainWindow extends JFrame {
 	
-	LoginWindow logwin;
+	LoginWindow LoginWindow;
 	String Procuratore;
 	private JPanel ContentPanel;
 	private JTextField WelcomeTextField;
-    Controller Login;
+    Controller Controller;
 	
 	
 	public MainWindow(Controller temp,String test) {
-		Login = temp;
+		Controller = temp;
 		Procuratore = test;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

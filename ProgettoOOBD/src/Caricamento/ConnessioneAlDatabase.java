@@ -45,25 +45,7 @@ public class ConnessioneAlDatabase extends JFrame {
 
 	private Controller c;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConnessioneAlDatabase frame = new ConnessioneAlDatabase();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public ConnessioneAlDatabase(Controller temp) {
 		c = temp;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
