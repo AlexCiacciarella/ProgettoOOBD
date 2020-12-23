@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import Controller.Controller;
 
@@ -61,7 +62,14 @@ public class LoginWindow extends JFrame {
 		JButton LoginButton = new JButton("Login");
 		LoginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			    String Procuratore = ProcuratoreTextField.getText();
+				
+			    Controller.MainWindowSpawn();
+			  
+			    try {
+					Controller.ShutDownLoginWindow();
+				}catch (SQLException e1) {
+					
+				}
 			}
 		});
 		LoginButton.setFont(new Font("Arial", Font.BOLD, 14));

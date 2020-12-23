@@ -32,9 +32,15 @@ public class DBCreateConnection {
 		{
 			System.out.println("La connessione non è stata trovata con errore: "+ noconn);
 		}
-		
 		//System.out.println("Programma eseguito");
-		
+	}
+
+	public boolean ConnectionExists() {
+		return !(Connessione==null);
+	}
+
+	public Connection getConnessione() {
+		return Connessione;
 	}
 	
 	

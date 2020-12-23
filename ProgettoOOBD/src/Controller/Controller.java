@@ -12,7 +12,7 @@ import MainWindow.MainWindow;
 public class Controller {
 	  //attributi
 	  LoginWindow LoginWindow;
-      MainWindow MainWindow;     
+      MainWindow FinestraPrincipale;     
       ConnessioneAlDatabase firstgui;
       DBCreateConnection connessionedb;
       
@@ -24,11 +24,15 @@ public class Controller {
     	  
       }
       
-      //costruttore
+      public void MainWindowSpawn() {
+		FinestraPrincipale = new MainWindow(this,this.LoginWindow.getProcuratoreTextField().getText());
+		FinestraPrincipale.setVisible(true);	
+	}
+
+	//costruttore
       public Controller() throws SQLException {
     	  //connessione alla prima gui
     	  onFirstGui();
-    	  
       }
       
       public void onFirstGui() throws SQLException{
@@ -39,6 +43,7 @@ public class Controller {
     		  firstgui.getCaricamentoTextField().setText("Caricamento del Driver Riuscito!");
     		  firstgui.getToLoginButton().setVisible(true);
     	  }
+    	  
       }
       
       public void CaricamentoToLogin() throws SQLException {
@@ -48,9 +53,12 @@ public class Controller {
       	  	  LoginWindow = new LoginWindow(this);
       	  	  LoginWindow.setVisible(true);
     	  }
+    	  
       }
 
-    
+    public void ShutDownLoginWindow() throws SQLException {
+    	LoginWindow.setVisible(false);
+    }
       
    
 
