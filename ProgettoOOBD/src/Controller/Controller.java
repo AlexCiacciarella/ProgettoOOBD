@@ -1,11 +1,13 @@
 package Controller;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.swing.*;
 
 import Caricamento.ConnessioneAlDatabase;
 import DBConfiguration.DBCreateConnection;
+import DBConfiguration.DBTableCreation;
 import LoginWindow.LoginWindow;
 import MainWindow.MainWindow;
 
@@ -14,7 +16,9 @@ public class Controller {
 	  LoginWindow LoginWindow;
       MainWindow FinestraPrincipale;     
       ConnessioneAlDatabase firstgui;
+      Connection connessione;
       DBCreateConnection connessionedb;
+      DBTableCreation Tablebuilder;
       
       
       //main
@@ -22,9 +26,10 @@ public class Controller {
     	  Controller c = new Controller();
     	  
     	  
+    	  
       }
       
-      public void MainWindowSpawn() {
+      public void MainWindowSpawn(){
 		FinestraPrincipale = new MainWindow(this,this.LoginWindow.getProcuratoreTextField().getText());
 		FinestraPrincipale.setVisible(true);	
 	}
@@ -59,6 +64,21 @@ public class Controller {
     public void ShutDownLoginWindow() throws SQLException {
     	LoginWindow.setVisible(false);
     }
+    
+    public void PassaConnessioneATableBuilder() {
+   		connessione = connessionedb.getConnessione();
+   		Tablebuilder = new DBTableCreation(connessione, this);
+    }
+    
+  public void RichiamaCreazioneProcuratore() throws SQLException{
+	  	PassaConnessioneATableBuilder();
+   		Tablebuilder.CreaTabellaProcuratore();
+   }
+  
+  public void RichiamaCreazioneAtleta() throws SQLException{
+	  PassaConnessioneATableBuilder();
+	  Tablebuilder.CreaTabellaAtleta();
+  }
       
    
 

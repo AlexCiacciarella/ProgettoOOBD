@@ -20,6 +20,7 @@ public class DBCreateConnection {
 	public DBCreateConnection(Controller temp) throws SQLException {
 		//Caricamento del Driver
 		c = temp;
+		Controllo = false;
 		try {
 			Class.forName("org.postgresql.Driver");
 			//Ottenimento di una connessione
@@ -35,30 +36,22 @@ public class DBCreateConnection {
 		//System.out.println("Programma eseguito");
 	}
 
-	public boolean ConnectionExists() {
-		return !(Connessione==null);
-	}
-
 	public Connection getConnessione() {
 		return Connessione;
 	}
 	
 	
-	
-	
-	
-	
-	/*public DBCreateConnection getInstance() throws SQLException{
-		if(istanza == null)
-		{
-			istanza = new DBCreateConnection();
-		}
-		else if (istanza.getConnection().is)
-		{
-			
-		}
-	}*/
-	
+//	public DBCreateConnection getInstance() throws SQLException{
+//		if(istanza == null)
+//		{
+//			istanza = new DBCreateConnection(c);
+//		}
+//		else if (istanza.getConnection().is)
+//		{
+//			
+//		}
+//	}
+//	
 	
 
 }

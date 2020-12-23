@@ -13,9 +13,14 @@ import javax.swing.table.DefaultTableModel;
 
 import LoginWindow.LoginWindow;
 import Controller.Controller;
+import DBConfiguration.DBTableCreation;
 
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
 public class MainWindow extends JFrame {
 	
 	LoginWindow LoginWindow;
@@ -25,7 +30,7 @@ public class MainWindow extends JFrame {
     Controller Controller;
 	
 	
-	public MainWindow(Controller temp,String test) {
+	public MainWindow(Controller temp,String test){
 		Controller = temp;
 		Procuratore = test;
 		
@@ -37,13 +42,43 @@ public class MainWindow extends JFrame {
 		ContentPanel.setLayout(null);
 		
 		WelcomeTextField = new JTextField();
+		WelcomeTextField.setBounds(277, 0, 336, 48);
 		WelcomeTextField.setHorizontalAlignment(SwingConstants.CENTER);
 		WelcomeTextField.setFont(new Font("Arial", Font.BOLD, 14));
 		WelcomeTextField.setEditable(false);
-		WelcomeTextField.setBounds(277, 0, 336, 48);
 		ContentPanel.add(WelcomeTextField);
 		WelcomeTextField.setColumns(10);
-		WelcomeTextField.setText("Welcome " +Procuratore );
+		WelcomeTextField.setText("Welcome " +Procuratore);
+		
+		JButton CreaProcuratoreButton = new JButton("Crea Procuratore");
+		CreaProcuratoreButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				try {
+					Controller.RichiamaCreazioneProcuratore();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		CreaProcuratoreButton.setFont(new Font("Arial", Font.BOLD, 14));
+		CreaProcuratoreButton.setBounds(194, 195, 164, 64);
+		ContentPanel.add(CreaProcuratoreButton);
+		
+		JButton CreaAtletaButton = new JButton("Crea Atleta");
+		CreaAtletaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Controller.RichiamaCreazioneAtleta();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		CreaAtletaButton.setFont(new Font("Arial", Font.BOLD, 14));
+		CreaAtletaButton.setBounds(548, 195, 164, 64);
+		ContentPanel.add(CreaAtletaButton);
 		
 	}
 }
