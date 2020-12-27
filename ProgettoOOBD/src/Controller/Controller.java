@@ -23,22 +23,22 @@ public class Controller {
       
       //main
       public static void main(String[] args) throws SQLException {
-    	  Controller c = new Controller();
-    	  
-    	  
+    	  Controller c = new Controller();  
     	  
       }
       
-      public void MainWindowSpawn(){
-		FinestraPrincipale = new MainWindow(this,this.LoginWindow.getProcuratoreTextField().getText());
-		FinestraPrincipale.setVisible(true);	
-	}
 
-	//costruttore
+	  //costruttore
       public Controller() throws SQLException {
     	  //connessione alla prima gui
     	  onFirstGui();
       }
+      
+      //metodi
+      public void MainWindowSpawn(){
+  		FinestraPrincipale = new MainWindow(this,this.LoginWindow.getProcuratoreTextField().getText());
+  		FinestraPrincipale.setVisible(true);	
+  	}
       
       public void onFirstGui() throws SQLException{
     	  firstgui = new ConnessioneAlDatabase(this);
@@ -46,8 +46,19 @@ public class Controller {
     	  connessionedb = new DBCreateConnection(this);
     	  if(connessionedb.Controllo) {
     		  firstgui.getCaricamentoTextField().setText("Caricamento del Driver Riuscito!");
-    		  firstgui.getToLoginButton().setVisible(true);
+    		  RichiamaCreazioneProcuratore();
+        	  RichiamaCreazioneAtleta();
+        	  
+        	  if(!(Tablebuilder.isProblemiCreazione())) {
+        		  firstgui.getCaricamentoTextField().setText("Creazione delle tabelle avvenuta con successo");
+        		  firstgui.getToLoginButton().setVisible(true);
+        	  }else {
+        		  firstgui.getCaricamentoTextField().setText("Si è verificato un problema nella creazione delle tabelle");
+        	  }
+            		  
+    		  
     	  }
+    	  
     	  
       }
       

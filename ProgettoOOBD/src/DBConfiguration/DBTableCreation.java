@@ -9,12 +9,20 @@ public class DBTableCreation {
 	Connection conn;
 	DBCreateConnection dbconnection;
 	Controller c;
+    private boolean ProblemiCreazione = false;
 	
-	
+    //getter e setter
+    public boolean isProblemiCreazione() {
+		return ProblemiCreazione;
+	}
+    
+    //costruttore
 	public DBTableCreation(Connection conn, Controller temp) {
 		this.conn = conn;
 		this.c = temp;
 	}
+	
+	//metodi
 	public boolean ConnectionExists() {
 		if(conn == null) {
 			return false;
@@ -56,6 +64,7 @@ public class DBTableCreation {
 				}else
 					System.out.println("La tabella Procuratore esiste già");
 			} catch (SQLException e) {
+				ProblemiCreazione = true;
 				System.out.println("C'è stato un problema a creare la tabella Procuratore: "+ e);
 			}
 			
@@ -84,6 +93,7 @@ public class DBTableCreation {
 				}else
 					System.out.println("La tabella Atleta esiste già");
 			} catch (SQLException e) {
+				ProblemiCreazione = true;
 				System.out.println("C'è stato un problema a creare la tabella Atleta : "+ e);
 			}
 			

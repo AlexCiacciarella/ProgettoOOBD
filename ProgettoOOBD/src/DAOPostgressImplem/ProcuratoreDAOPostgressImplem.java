@@ -41,7 +41,7 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 	}
 
 	@Override
-	public Club getClubPiùRedditizio(Procuratore procuratore) {
+	public Club getClubPiùRedditizio() {
 		// TODO Auto-generated method stub
 		return null;
 	}

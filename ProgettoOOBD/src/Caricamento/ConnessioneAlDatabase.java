@@ -61,7 +61,7 @@ public class ConnessioneAlDatabase extends JFrame {
 		CaricamentoTextField.setText("Driver Non Connesso");
 		CaricamentoTextField.setEditable(false);
 		CaricamentoTextField.setFont(new Font("Arial", Font.BOLD, 22));
-		CaricamentoTextField.setBounds(345, 125, 398, 61);
+		CaricamentoTextField.setBounds(255, 126, 570, 61);
 		contentPane.add(CaricamentoTextField);
 		CaricamentoTextField.setColumns(10);
 		

@@ -13,5 +13,5 @@ public interface ProcuratoreDAO {
 	public List<Integer> getGettoniNaz(Atleta atleta);
 	public double PercentualeGuadagno(Contratto contratto);
 	public Atleta getAtletaPiùRedditizio(Procuratore procuratore);
-	public Club getClubPiùRedditizio(Procuratore procuratore);
+	public Club getClubPiùRedditizio();
 }
