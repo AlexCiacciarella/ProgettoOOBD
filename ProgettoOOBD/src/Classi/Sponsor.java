@@ -6,7 +6,7 @@ public class Sponsor extends Contratto {
 
 	public Sponsor(int durata, double guadagno, Atleta contrattoAtleta,String tipocontratto) {
 		super(durata, guadagno, contrattoAtleta);
-		TipoContratto = tipocontratto;
+		TipoContratto = "Sponsor";
 	}
 
 

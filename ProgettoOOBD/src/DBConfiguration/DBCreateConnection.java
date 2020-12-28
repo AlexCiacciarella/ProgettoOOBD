@@ -39,6 +39,8 @@ public class DBCreateConnection {
 	public Connection getConnessione() {
 		return Connessione;
 	}
+
+
 	
 	
 //	public DBCreateConnection getInstance() throws SQLException{

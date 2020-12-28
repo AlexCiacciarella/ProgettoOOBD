@@ -6,7 +6,7 @@ public class Club extends Contratto {
 	//costruttore
 	public Club(int durata, double guadagno, Atleta contrattoAtleta,String tipocontratto) {
 		super(durata, guadagno, contrattoAtleta);
-		TipoContratto = tipocontratto;
+		TipoContratto = "Club";
 	}
 
 	//getter e setter
