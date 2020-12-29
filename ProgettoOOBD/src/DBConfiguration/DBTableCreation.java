@@ -10,13 +10,20 @@ public class DBTableCreation {
 	DBCreateConnection dbconnection;
 	Controller c;
     private boolean ProblemiCreazione = false;
+    private boolean ProblemiVincoli = false;
 	
     //getter e setter
     public boolean isProblemiCreazione() {
 		return ProblemiCreazione;
 	}
     
-    //costruttore
+    
+    
+    public boolean isProblemiVincoli() {
+		return ProblemiVincoli;
+	}
+
+	//costruttore
 	public DBTableCreation(Connection conn, Controller temp) {
 		this.conn = conn;
 		this.c = temp;
@@ -40,13 +47,30 @@ public class DBTableCreation {
 			 return false;
 		}
 	}
+	
+	public void ControllaIdEPassword(String id, String password) {
+		//NON è FINITO!
+		Statement st = null;
+		try{
+			st = conn.createStatement();
+			String query = "SELECT "
+						+ " FROM procuratore AS p"
+						+ " WHERE p.id_procuratore = "+ id;
+		}catch(SQLException e){
+			
+		}
+	}
+	
+	public void FunzionePerIVincoli() {
+		Statement st;
+			
+	}
 
 	public void CreaTabellaProcuratore()
 	{
 		Statement statement = null;
 		if(ConnectionExists())
 		{
-			int result;
 			try {
 				statement = conn.createStatement();
 				if(!TableExists("procuratore")){
@@ -57,8 +81,9 @@ public class DBTableCreation {
 										"  Cognome VARCHAR(200),"+
 										"  Percentuale_Guadagno float,"+
 										"  Stipendio float,"+
-										"  PRIMARY KEY(id_procuratore));";
-					result = statement.executeUpdate(sqlcommand);
+										"  id_Atleta VARCHAR(10),"+
+										"  PRIMARY KEY(id_Procuratore));";
+					statement.executeUpdate(sqlcommand);
 					System.out.println("Tabella Creata");
 					statement.close();
 				}else
@@ -76,7 +101,6 @@ public class DBTableCreation {
 		Statement statement = null;
 		if(ConnectionExists())
 		{
-			int result;
 			try {
 				statement = conn.createStatement();
 				if(!(TableExists("atleta"))){
@@ -86,9 +110,11 @@ public class DBTableCreation {
 										"  Cognome VARCHAR(200),"+
 										"  GettonePresenzaNazionale float,"+
 										"  Stipendio float,"+
+										"  id_Procuratore VARCHAR(10),"+
+										"  id_Contratto VARCHAR(10),"+
 										"  PRIMARY KEY(id_Atleta));";
-					result = statement.executeUpdate(sqlcommand);
-					System.out.println("La tabella è stata creata " + result);
+					statement.executeUpdate(sqlcommand);
+					System.out.println("La tabella è stata creata ");
 					statement.close();
 				}else
 					System.out.println("La tabella Atleta esiste già");
@@ -96,8 +122,65 @@ public class DBTableCreation {
 				ProblemiCreazione = true;
 				System.out.println("C'è stato un problema a creare la tabella Atleta : "+ e);
 			}
-			
 		}
 	}
-
-}
+			
+			public void CreaTabellaContratto()
+			{
+				Statement statement = null;
+				if(ConnectionExists())
+				{
+					try {
+						statement = conn.createStatement();
+						if(!(TableExists("contratto"))){
+							String sqlcommand = "CREATE TABLE Contratto"+
+												"( id_Contratto VARCHAR(10) not null,"+
+												"  Durata int not null,"+
+												"  Guadagno float not null,"+
+												"  TipoContratto VARCHAR(7) not null,"+
+												"  id_Atleta VARCHAR(10),"+
+												"  PRIMARY KEY(id_Contratto));";
+							statement.executeUpdate(sqlcommand);
+							System.out.println("La tabella è stata creata ");
+							statement.close();
+						}else
+							System.out.println("La tabella Contratto esiste già");
+					} catch (SQLException e) {
+						ProblemiCreazione = true;
+						System.out.println("C'è stato un problema a creare la tabella Contratto : "+ e);
+					}
+				
+				}
+			
+			}
+			
+			public void CreaVincoliTabelle() throws SQLException {
+				Statement statement = null;
+				try {
+					statement = conn.createStatement();
+					String AlteraAtleta1 =" ALTER TABLE Atleta "
+										+ " DROP CONSTRAINT IF EXISTS atleta_id_procuratore_fkey,"+
+										 " ADD FOREIGN KEY (id_Procuratore) REFERENCES Procuratore(id_Procuratore)";
+					String AlteraAtleta2 =" ALTER TABLE Atleta "
+										+ " DROP CONSTRAINT IF EXISTS atleta_id_contratto_fkey,"+
+							 			 " ADD FOREIGN KEY (id_Contratto) REFERENCES Contratto(id_Contratto);";
+					String AlteraProcuratore =" ALTER TABLE Procuratore "
+											+ " DROP CONSTRAINT IF EXISTS procuratore_id_atleta_fkey,"+
+							 " ADD FOREIGN KEY (id_Atleta) REFERENCES Atleta(id_Atleta);";
+					String AlteraContratto =" ALTER TABLE Contratto "
+											+"DROP CONSTRAINT IF EXISTS contratto_id_atleta_fkey,"+
+							 " ADD FOREIGN KEY (id_Atleta) REFERENCES Atleta(id_Atleta);";
+					statement.executeUpdate(AlteraAtleta1);
+					statement.executeUpdate(AlteraAtleta2);
+					statement.executeUpdate(AlteraProcuratore);
+					statement.executeUpdate(AlteraContratto);
+					System.out.println("Vincoli creati!");
+					statement.close();
+				}catch(SQLException e){
+					System.out.println("C'è stato un problema a creare i vincoli delle tabelle : "+ e);
+					ProblemiVincoli = true;
+				}
+				
+				
+			}
+	}

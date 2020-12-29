@@ -62,14 +62,13 @@ public class LoginWindow extends JFrame {
 		JButton LoginButton = new JButton("Login");
 		LoginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-			    Controller.MainWindowSpawn();
-			  
-			    try {
-					Controller.ShutDownLoginWindow();
-				}catch (SQLException e1) {
-					
-				}
+				Controller.ControlloLogin(getProcuratoreTextField().getText(), getProcuratorePasswordField().getText());;
+//			    Controller.MainWindowSpawn();
+//			    try {
+//					Controller.ShutDownLoginWindow();
+//				}catch (SQLException e1) {
+//					
+//				}
 			}
 		});
 		LoginButton.setFont(new Font("Arial", Font.BOLD, 14));

@@ -3,7 +3,6 @@ package DAOPostgressImplem;
 import java.util.List;
 
 import Classi.Atleta;
-import Classi.Club;
 import Classi.Contratto;
 import Classi.Procuratore;
 import Daos.ProcuratoreDAO;
@@ -41,7 +40,7 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 	}
 
 	@Override
-	public Club getClubPiùRedditizio() {
+	public Contratto getClubPiùRedditizio() {
 		// TODO Auto-generated method stub
 		return null;
 	}

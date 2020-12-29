@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.swing.*;
 
 import Caricamento.ConnessioneAlDatabase;
+import Classi.Contratto;
 import DBConfiguration.DBCreateConnection;
 import DBConfiguration.DBTableCreation;
 import LoginWindow.LoginWindow;
@@ -19,6 +20,9 @@ public class Controller {
       Connection connessione;
       DBCreateConnection connessionedb;
       DBTableCreation Tablebuilder;
+      
+      
+      Contratto con;
       
       
       //main
@@ -36,8 +40,8 @@ public class Controller {
       
       //metodi
       public void MainWindowSpawn(){
-  		FinestraPrincipale = new MainWindow(this,this.LoginWindow.getProcuratoreTextField().getText());
-  		FinestraPrincipale.setVisible(true);	
+  		FinestraPrincipale = new MainWindow(this,null);
+  		FinestraPrincipale.setVisible(true);
   	}
       
       public void onFirstGui() throws SQLException{
@@ -46,12 +50,18 @@ public class Controller {
     	  connessionedb = new DBCreateConnection(this);
     	  if(connessionedb.Controllo) {
     		  firstgui.getCaricamentoTextField().setText("Caricamento del Driver Riuscito!");
+    		  RichiamaCreazioneAtleta();
     		  RichiamaCreazioneProcuratore();
-        	  RichiamaCreazioneAtleta();
+        	  RichiamaCreazioneContratto();
         	  
         	  if(!(Tablebuilder.isProblemiCreazione())) {
         		  firstgui.getCaricamentoTextField().setText("Creazione delle tabelle avvenuta con successo");
-        		  firstgui.getToLoginButton().setVisible(true);
+        		  RichiamaCreaVincoli();
+        		  if(!(Tablebuilder.isProblemiVincoli()))
+        		  {
+        			  firstgui.getCaricamentoTextField().setText("Creazione dei vincoli avvenuta con successo");
+        			  firstgui.getToLoginButton().setVisible(true);
+        		  }
         	  }else {
         		  firstgui.getCaricamentoTextField().setText("Si è verificato un problema nella creazione delle tabelle");
         	  }
@@ -70,6 +80,11 @@ public class Controller {
       	  	  LoginWindow.setVisible(true);
     	  }
     	  
+      }
+      
+      public void ControlloLogin(String id, String pass) {
+    	  PassaConnessioneATableBuilder();
+    	  Tablebuilder.ControllaIdEPassword(id, pass);
       }
 
     public void ShutDownLoginWindow() throws SQLException {
@@ -90,7 +105,16 @@ public class Controller {
 	  PassaConnessioneATableBuilder();
 	  Tablebuilder.CreaTabellaAtleta();
   }
-      
+  
+  public void RichiamaCreazioneContratto() throws SQLException{
+	  PassaConnessioneATableBuilder();
+	  Tablebuilder.CreaTabellaContratto();
+  }
+  
+  public void RichiamaCreaVincoli() throws SQLException{
+	  PassaConnessioneATableBuilder();
+	  Tablebuilder.CreaVincoliTabelle();
+  }
    
 
 	

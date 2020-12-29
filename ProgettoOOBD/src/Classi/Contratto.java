@@ -4,16 +4,19 @@ public class Contratto {
 	//attributi
 	private int Durata;
 	private double Guadagno;
-	private Atleta ContrattoAtleta;
+	private Atleta Atleta;
+	private String TipoContratto;
+	
 	
 	//costruttore
-	public Contratto(int durata, double guadagno, Atleta contrattoAtleta) {
+	public Contratto(int durata, double guadagno, Atleta atleta, String tipocontratto) {
 		super();
 		Durata = durata;
 		Guadagno = guadagno;
-		ContrattoAtleta = contrattoAtleta;
+		Atleta = atleta;
+		TipoContratto = tipocontratto;
 	}
-	
+
 	//getter e setter
 	public int getDurata() {
 		return Durata;
@@ -27,11 +30,11 @@ public class Contratto {
 	public void setGuadagno(double guadagno) {
 		Guadagno = guadagno;
 	}
-	public Atleta getContrattoAtleta() {
-		return ContrattoAtleta;
+	public Atleta getAtleta() {
+		return Atleta;
 	}
-	public void setContrattoAtleta(Atleta contrattoAtleta) {
-		ContrattoAtleta = contrattoAtleta;
+	public void setAtleta(Atleta contrattoAtleta) {
+		Atleta = contrattoAtleta;
 	}
     
 }
