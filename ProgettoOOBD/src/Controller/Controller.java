@@ -39,8 +39,8 @@ public class Controller {
       }
       
       //metodi
-      public void MainWindowSpawn(){
-  		FinestraPrincipale = new MainWindow(this,null);
+      public void MainWindowSpawn(String nome){
+    	FinestraPrincipale = new MainWindow(this, nome);
   		FinestraPrincipale.setVisible(true);
   	}
       
@@ -82,9 +82,18 @@ public class Controller {
     	  
       }
       
-      public void ControlloLogin(String id, String pass) {
+      public void ControlloLogin(String id, String pass) throws SQLException{
+    	  String nome;
     	  PassaConnessioneATableBuilder();
-    	  Tablebuilder.ControllaIdEPassword(id, pass);
+    	  nome = Tablebuilder.ControllaIdEPassword(id, pass);
+    	  if(Tablebuilder.isProblemiLogin() == false)
+    	  {
+    		  LoginWindow.setVisible(false);
+    		  MainWindowSpawn(nome);
+    	  }else
+    	  {
+    		  JOptionPane.showMessageDialog(null, "ID o password sbagliati");
+    	  }
       }
 
     public void ShutDownLoginWindow() throws SQLException {

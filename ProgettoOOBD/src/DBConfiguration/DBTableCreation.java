@@ -3,6 +3,7 @@ package DBConfiguration;
 import java.sql.*;
 
 import Controller.Controller;
+import MainWindow.MainWindow;
 
 public class DBTableCreation {
 	
@@ -11,15 +12,25 @@ public class DBTableCreation {
 	Controller c;
     private boolean ProblemiCreazione = false;
     private boolean ProblemiVincoli = false;
+    private boolean ProblemiLogin = false;
 	
     //getter e setter
+    
+    
+    
     public boolean isProblemiCreazione() {
 		return ProblemiCreazione;
 	}
     
     
     
-    public boolean isProblemiVincoli() {
+    public boolean isProblemiLogin() {
+		return ProblemiLogin;
+	}
+
+
+
+	public boolean isProblemiVincoli() {
 		return ProblemiVincoli;
 	}
 
@@ -48,19 +59,37 @@ public class DBTableCreation {
 		}
 	}
 	
-	public void ControllaIdEPassword(String id, String password) {
+	public String ControllaIdEPassword(String id, String password) throws SQLException{
 		//NON è FINITO!
-		Statement st = null;
+		String nome = null;
 		try{
-			st = conn.createStatement();
-			String query = "SELECT "
-						+ " FROM procuratore AS p"
-						+ " WHERE p.id_procuratore = "+ id;
+			PreparedStatement login =conn.prepareStatement("SELECT procuratore.id_procuratore, procuratore.password, procuratore.nome "
+					  									  +"FROM procuratore "
+					  									  +"WHERE procuratore.id_procuratore = ? AND procuratore.password = ? ;");
+			login.setString(1, id);
+			login.setString(2, password);
+			ResultSet rs = login.executeQuery();
+			if(rs.next()) {
+				System.out.println("Accesso effettuato");
+				nome = rs.getString("nome");
+				ProblemiLogin = false;
+				System.out.println(nome);
+				return nome;
+			}else
+			{
+				System.out.println("Id o password errati");
+				ProblemiLogin = true;
+			}
+			return nome;
 		}catch(SQLException e){
+			System.out.println("Errore nel controllo id e pass "+ e);
 			
 		}
+		return nome;
+		
 	}
-	
+
+
 	public void FunzionePerIVincoli() {
 		Statement st;
 			
@@ -82,7 +111,8 @@ public class DBTableCreation {
 										"  Percentuale_Guadagno float,"+
 										"  Stipendio float,"+
 										"  id_Atleta VARCHAR(10),"+
-										"  PRIMARY KEY(id_Procuratore));";
+										"  PRIMARY KEY(id_Procuratore)"
+										+ "UNIQUE (id_Procuratore));";
 					statement.executeUpdate(sqlcommand);
 					System.out.println("Tabella Creata");
 					statement.close();
