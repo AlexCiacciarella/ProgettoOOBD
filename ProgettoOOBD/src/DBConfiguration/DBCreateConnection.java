@@ -8,11 +8,10 @@ public class DBCreateConnection {
 	
 	private static DBCreateConnection istanza;
 	private Connection Connessione;
-	private String IP = "localhost";
-	private String Username = "postgres";
-	private String password = "admin";
-	private String port = "5432";
-	private String Url = "jdbc:postgresql://"+IP+":"+port+"/AgenziaProcuratoriSportivi";
+	private String IP = "rogue.db.elephantsql.com";
+	private String Username = "bqsiywek";
+	private String password = "uubz-OEXoS00fIK-skdbm0LL9cvpplE8";
+	private String Url = "jdbc:postgresql://"+IP+"/"+Username+"?user="+Username+"&password="+password;
 	public Controller c;
 	public boolean Controllo = false;
 	
@@ -24,7 +23,7 @@ public class DBCreateConnection {
 		try {
 			Class.forName("org.postgresql.Driver");
 			//Ottenimento di una connessione
-			Connessione = DriverManager.getConnection(Url,Username, password);
+			Connessione = DriverManager.getConnection(Url);
 			System.out.println("Connessione stabilita");
 			Controllo = true;
 		}catch(ClassNotFoundException NFE){

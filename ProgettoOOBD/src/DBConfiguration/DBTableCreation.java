@@ -60,7 +60,6 @@ public class DBTableCreation {
 	}
 	
 	public String ControllaIdEPassword(String id, String password) throws SQLException{
-		//NON è FINITO!
 		String nome = null;
 		try{
 			PreparedStatement login =conn.prepareStatement("SELECT procuratore.id_procuratore, procuratore.password, procuratore.nome "
@@ -104,15 +103,16 @@ public class DBTableCreation {
 				statement = conn.createStatement();
 				if(!TableExists("procuratore")){
 					String sqlcommand = "CREATE TABLE Procuratore"+
-										"( id_Procuratore VARCHAR(10) not null,"+
+										"( id_Procuratore int not null,"+ 
+										"  email VARCHAR(100) not null ,"+
 										"  password VARCHAR(20) NOT NULL,"+
 										"  Nome VARCHAR(200) ,"+
 										"  Cognome VARCHAR(200),"+
 										"  Percentuale_Guadagno float,"+
 										"  Stipendio float,"+
-										"  id_Atleta VARCHAR(10),"+
-										"  PRIMARY KEY(id_Procuratore)"
-										+ "UNIQUE (id_Procuratore));";
+										"  PRIMARY KEY(id_Procuratore) ,"
+										+ "UNIQUE (id_Procuratore, email), "
+										+ "CONSTRAINT CK_name CHECK (email ~* '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$'));";
 					statement.executeUpdate(sqlcommand);
 					System.out.println("Tabella Creata");
 					statement.close();
@@ -140,8 +140,7 @@ public class DBTableCreation {
 										"  Cognome VARCHAR(200),"+
 										"  GettonePresenzaNazionale float,"+
 										"  Stipendio float,"+
-										"  id_Procuratore VARCHAR(10),"+
-										"  id_Contratto VARCHAR(10),"+
+										"  id_Procuratore int,"+
 										"  PRIMARY KEY(id_Atleta));";
 					statement.executeUpdate(sqlcommand);
 					System.out.println("La tabella è stata creata ");
@@ -191,18 +190,10 @@ public class DBTableCreation {
 					String AlteraAtleta1 =" ALTER TABLE Atleta "
 										+ " DROP CONSTRAINT IF EXISTS atleta_id_procuratore_fkey,"+
 										 " ADD FOREIGN KEY (id_Procuratore) REFERENCES Procuratore(id_Procuratore)";
-					String AlteraAtleta2 =" ALTER TABLE Atleta "
-										+ " DROP CONSTRAINT IF EXISTS atleta_id_contratto_fkey,"+
-							 			 " ADD FOREIGN KEY (id_Contratto) REFERENCES Contratto(id_Contratto);";
-					String AlteraProcuratore =" ALTER TABLE Procuratore "
-											+ " DROP CONSTRAINT IF EXISTS procuratore_id_atleta_fkey,"+
-							 " ADD FOREIGN KEY (id_Atleta) REFERENCES Atleta(id_Atleta);";
 					String AlteraContratto =" ALTER TABLE Contratto "
 											+"DROP CONSTRAINT IF EXISTS contratto_id_atleta_fkey,"+
 							 " ADD FOREIGN KEY (id_Atleta) REFERENCES Atleta(id_Atleta);";
 					statement.executeUpdate(AlteraAtleta1);
-					statement.executeUpdate(AlteraAtleta2);
-					statement.executeUpdate(AlteraProcuratore);
 					statement.executeUpdate(AlteraContratto);
 					System.out.println("Vincoli creati!");
 					statement.close();
@@ -213,4 +204,5 @@ public class DBTableCreation {
 				
 				
 			}
+			
 	}

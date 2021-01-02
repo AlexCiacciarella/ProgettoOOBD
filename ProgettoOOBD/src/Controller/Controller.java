@@ -27,7 +27,7 @@ public class Controller {
       
       //main
       public static void main(String[] args) throws SQLException {
-    	  Controller c = new Controller();  
+    	  Controller c = new Controller();
     	  
       }
       
