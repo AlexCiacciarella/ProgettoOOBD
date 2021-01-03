@@ -2,6 +2,8 @@ package Controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -39,8 +41,8 @@ public class Controller {
       }
       
       //metodi
-      public void MainWindowSpawn(String nome){
-    	FinestraPrincipale = new MainWindow(this, nome);
+      public void MainWindowSpawn(String nome, String cognome){
+    	FinestraPrincipale = new MainWindow(this, nome, cognome);
   		FinestraPrincipale.setVisible(true);
   	}
       
@@ -83,16 +85,21 @@ public class Controller {
       }
       
       public void ControlloLogin(String id, String pass) throws SQLException{
-    	  String nome;
+    	  String nome, cognome;
+    	  List list = new ArrayList<String>();
     	  PassaConnessioneATableBuilder();
-    	  nome = Tablebuilder.ControllaIdEPassword(id, pass);
+    	  list = Tablebuilder.ControllaIdEPassword(id, pass);
+    	  nome = (String) list.get(0);
+    	  cognome = (String) list.get(1);
     	  if(Tablebuilder.isProblemiLogin() == false)
     	  {
     		  LoginWindow.setVisible(false);
-    		  MainWindowSpawn(nome);
+    		  MainWindowSpawn(nome, cognome);
     	  }else
     	  {
     		  JOptionPane.showMessageDialog(null, "ID o password sbagliati");
+    		  LoginWindow.getProcuratoreTextField().setText("");
+    		  LoginWindow.getProcuratorePasswordField().setText("");
     	  }
       }
 

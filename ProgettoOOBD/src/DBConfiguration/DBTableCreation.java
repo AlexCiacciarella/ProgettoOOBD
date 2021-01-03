@@ -1,6 +1,8 @@
 package DBConfiguration;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import Controller.Controller;
 import MainWindow.MainWindow;
@@ -59,32 +61,37 @@ public class DBTableCreation {
 		}
 	}
 	
-	public String ControllaIdEPassword(String id, String password) throws SQLException{
+	public List ControllaIdEPassword(String email, String password) throws SQLException{
 		String nome = null;
+		String cognome = null;
+		List lista = new ArrayList<String>();
 		try{
-			PreparedStatement login =conn.prepareStatement("SELECT procuratore.id_procuratore, procuratore.password, procuratore.nome "
+			PreparedStatement login =conn.prepareStatement("SELECT procuratore.email, procuratore.password, procuratore.nome, procuratore.cognome  "
 					  									  +"FROM procuratore "
-					  									  +"WHERE procuratore.id_procuratore = ? AND procuratore.password = ? ;");
-			login.setString(1, id);
+					  									  +"WHERE procuratore.email = ? AND procuratore.password = ? ;");
+			login.setString(1, email);
 			login.setString(2, password);
 			ResultSet rs = login.executeQuery();
 			if(rs.next()) {
 				System.out.println("Accesso effettuato");
 				nome = rs.getString("nome");
+				cognome = rs.getString("cognome");
 				ProblemiLogin = false;
 				System.out.println(nome);
-				return nome;
+				lista.add(nome);
+				lista.add(cognome);
+				return lista;
 			}else
 			{
 				System.out.println("Id o password errati");
 				ProblemiLogin = true;
 			}
-			return nome;
+			return lista;
 		}catch(SQLException e){
 			System.out.println("Errore nel controllo id e pass "+ e);
 			
 		}
-		return nome;
+		return lista;
 		
 	}
 

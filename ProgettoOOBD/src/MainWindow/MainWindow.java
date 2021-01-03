@@ -24,15 +24,16 @@ import java.awt.event.ActionEvent;
 public class MainWindow extends JFrame {
 	
 	LoginWindow LoginWindow;
-	String Procuratore;
+	String Nome, Cognome;
 	private JPanel ContentPanel;
 	private JTextField WelcomeTextField;
     Controller Controller;
 	
 	
-	public MainWindow(Controller temp,String test){
+	public MainWindow(Controller temp,String nome, String cognome){
 		Controller = temp;
-		Procuratore = test;
+		Nome = nome;
+		Cognome = cognome;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 966, 502);
@@ -48,7 +49,7 @@ public class MainWindow extends JFrame {
 		WelcomeTextField.setEditable(false);
 		ContentPanel.add(WelcomeTextField);
 		WelcomeTextField.setColumns(10);
-		WelcomeTextField.setText("Welcome " +Procuratore);
+		WelcomeTextField.setText("Welcome " + nome + " " + cognome);
 		
 	}
 }
