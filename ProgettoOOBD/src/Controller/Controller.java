@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import Caricamento.ConnessioneAlDatabase;
 import Classi.Contratto;
+import DAOPostgressImplem.ProcuratoreDAOPostgressImplem;
 import DBConfiguration.DBCreateConnection;
 import DBConfiguration.DBTableCreation;
 import LoginWindow.LoginWindow;
@@ -22,6 +23,8 @@ public class Controller {
       Connection connessione;
       DBCreateConnection connessionedb;
       DBTableCreation Tablebuilder;
+      
+      ProcuratoreDAOPostgressImplem ProcuratoreDAO;
       
       
       Contratto con;
@@ -41,9 +44,10 @@ public class Controller {
       }
       
       //metodi
-      public void MainWindowSpawn(String nome, String cognome){
-    	FinestraPrincipale = new MainWindow(this, nome, cognome);
-  		FinestraPrincipale.setVisible(true);
+      public void MainWindowSpawn(String nome, String cognome,int id) throws SQLException{
+    	ProcuratoreDAO.getAtletaByProcuratore(id);
+    	FinestraPrincipale = new MainWindow(this, nome, cognome,id);
+  		FinestraPrincipale.setVisible(true);	
   	}
       
       public void onFirstGui() throws SQLException{
@@ -84,17 +88,20 @@ public class Controller {
     	  
       }
       
-      public void ControlloLogin(String id, String pass) throws SQLException{
+      public void ControlloLogin(String email, String pass) throws SQLException{
     	  String nome, cognome;
-    	  List list = new ArrayList<String>();
+    	  int id = 0;
+    	  List list = new ArrayList<>();
     	  PassaConnessioneATableBuilder();
-    	  list = Tablebuilder.ControllaIdEPassword(id, pass);
-    	  nome = (String) list.get(0);
-    	  cognome = (String) list.get(1);
+    	  list = Tablebuilder.ControllaIdEPassword(email, pass);
     	  if(Tablebuilder.isProblemiLogin() == false)
     	  {
+    		  nome = (String) list.get(0);
+        	  cognome = (String) list.get(1);
+        	  id = (int) list.get(2);
+        	  
     		  LoginWindow.setVisible(false);
-    		  MainWindowSpawn(nome, cognome);
+    		  MainWindowSpawn(nome, cognome,id);
     	  }else
     	  {
     		  JOptionPane.showMessageDialog(null, "ID o password sbagliati");
@@ -132,7 +139,7 @@ public class Controller {
 	  Tablebuilder.CreaVincoliTabelle();
   }
    
-
+  
 	
        
 

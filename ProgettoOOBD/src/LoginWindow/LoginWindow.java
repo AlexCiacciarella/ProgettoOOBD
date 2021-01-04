@@ -43,7 +43,7 @@ public class LoginWindow extends JFrame {
 		
 		ProcuratoreTextField = new JTextField();
 		ProcuratoreTextField.setFont(new Font("Arial", Font.PLAIN, 14));
-		ProcuratoreTextField.setBounds(374, 143, 124, 31);
+		ProcuratoreTextField.setBounds(374, 143, 225, 31);
 		MainContentPanel.add(ProcuratoreTextField);
 		ProcuratoreTextField.setColumns(10);
 		
@@ -77,12 +77,12 @@ public class LoginWindow extends JFrame {
 			}
 		});
 		LoginButton.setFont(new Font("Arial", Font.BOLD, 14));
-		LoginButton.setBounds(374, 330, 124, 54);
+		LoginButton.setBounds(412, 328, 124, 54);
 		MainContentPanel.add(LoginButton);
 		
 		ProcuratorePasswordField = new JPasswordField();
 		ProcuratorePasswordField.setFont(new Font("Arial", Font.PLAIN, 14));
-		ProcuratorePasswordField.setBounds(374, 215, 124, 31);
+		ProcuratorePasswordField.setBounds(374, 215, 225, 31);
 		MainContentPanel.add(ProcuratorePasswordField);
 	}
 
