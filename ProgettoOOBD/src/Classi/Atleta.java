@@ -17,6 +17,16 @@ public class Atleta {
 		this.id_atleta = id_atleta;
 	}
 
+	public Atleta(double gettonePresenzaNazionale, String nome, String cognome, double stipendio,
+			String id_atleta) {
+		super();
+		GettonePresenzaNazionale = gettonePresenzaNazionale;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.stipendio = stipendio;
+		this.id_atleta = id_atleta;
+	}
+
 	//Getter e Setter
 	public double getGettonePresenzaNazionale() {
 		return GettonePresenzaNazionale;
@@ -64,6 +74,12 @@ public class Atleta {
 
 	public void setId_atleta(String id_atleta) {
 		this.id_atleta = id_atleta;
+	}
+
+	
+	public String toString() {
+		return "\nNome=" + nome + ", Cognome=" + cognome + ", Stipendio="
+				+ stipendio + ", GettonePresenzaNazionale=" + GettonePresenzaNazionale + "\n";
 	}
 	
 	

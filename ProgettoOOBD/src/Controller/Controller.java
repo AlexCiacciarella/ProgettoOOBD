@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.*;
 
 import Caricamento.ConnessioneAlDatabase;
+import Classi.Atleta;
 import Classi.Contratto;
 import DAOPostgressImplem.ProcuratoreDAOPostgressImplem;
 import DBConfiguration.DBCreateConnection;
@@ -25,10 +26,8 @@ public class Controller {
       DBTableCreation Tablebuilder;
       
       ProcuratoreDAOPostgressImplem ProcuratoreDAO;
-      
-      
       Contratto con;
-      
+      ArrayList<Atleta> ListaAtleti = new ArrayList<Atleta>();
       
       //main
       public static void main(String[] args) throws SQLException {
@@ -45,9 +44,12 @@ public class Controller {
       
       //metodi
       public void MainWindowSpawn(String nome, String cognome,int id) throws SQLException{
-    	ProcuratoreDAO.getAtletaByProcuratore(id);
-    	FinestraPrincipale = new MainWindow(this, nome, cognome,id);
+    	ProcuratoreDAO = new ProcuratoreDAOPostgressImplem(this.connessione,this);
+    	ListaAtleti = ProcuratoreDAO.getAtletaByProcuratore(id);
+    	System.out.println(ListaAtleti);
+    	FinestraPrincipale = new MainWindow(this, nome, cognome,id,ListaAtleti);
   		FinestraPrincipale.setVisible(true);	
+  		
   	}
       
       public void onFirstGui() throws SQLException{
@@ -138,6 +140,9 @@ public class Controller {
 	  PassaConnessioneATableBuilder();
 	  Tablebuilder.CreaVincoliTabelle();
   }
+
+
+
    
   
 	

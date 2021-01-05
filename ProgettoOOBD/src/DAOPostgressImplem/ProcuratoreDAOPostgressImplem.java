@@ -15,11 +15,12 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
     //Attributi
 	private Connection conn;
     private PreparedStatement getAtletaByProcuratorePS;
+    Controller Controller;
     
     //Costruttore
-	public ProcuratoreDAOPostgressImplem(Connection Connection) throws SQLException {
+	public ProcuratoreDAOPostgressImplem(Connection Connection,Controller temp) throws SQLException {
 		this.conn=Connection;
-		
+		this.Controller = temp;
 	}
 
 	//Metodi

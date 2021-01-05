@@ -10,7 +10,7 @@ import javax.swing.JTable;
 import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
 
-
+import Classi.Atleta;
 import LoginWindow.LoginWindow;
 import Controller.Controller;
 import DBConfiguration.DBTableCreation;
@@ -21,6 +21,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
@@ -29,6 +30,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
 import java.awt.Button;
 import javax.swing.JScrollBar;
+import javax.swing.ListSelectionModel;
+import javax.swing.AbstractListModel;
 public class MainWindow extends JFrame {
 	int ID;
 	LoginWindow LoginWindow;
@@ -36,10 +39,11 @@ public class MainWindow extends JFrame {
 	private JPanel ContentPanel;
 	private JTextField WelcomeTextField;
     Controller Controller;
-    private JTable table;
+	ArrayList<Atleta> ListaAtleti;
 	
 	
-	public MainWindow(Controller temp,String nome, String cognome,int id){
+	public MainWindow(Controller temp,String nome, String cognome,int id,ArrayList<Atleta> Lista){
+		ListaAtleti = Lista;
 		Controller = temp;
 		Nome = nome;
 		Cognome = cognome;
@@ -61,9 +65,18 @@ public class MainWindow extends JFrame {
 		WelcomeTextField.setColumns(10);
 		WelcomeTextField.setText("Welcome " + nome + " " + cognome);
 		
-		table = new JTable();
-		table.setBounds(10, 67, 930, 367);
-		ContentPanel.add(table);
+		JScrollPane AtletaListScrollPanel = new JScrollPane();
+		AtletaListScrollPanel.setBounds(10, 83, 930, 369);
+		ContentPanel.add(AtletaListScrollPanel);
+		
+		JList AtletaList = new JList();
+		AtletaList.setFont(new Font("Arial", Font.PLAIN, 14));
+		AtletaListScrollPanel.setViewportView(AtletaList);
+		DefaultListModel ListModel = new DefaultListModel();
+	    for(int i=0;i<ListaAtleti.size();i++) {
+	    	ListModel.addElement(ListaAtleti.get(i));
+	    }
+		AtletaList.setModel(ListModel);
 		
 	}
 }
