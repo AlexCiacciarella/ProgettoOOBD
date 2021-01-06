@@ -12,68 +12,47 @@ public class Atleta {
 	private String id_atleta;
 	
 	//Costruttore
-	public Atleta(String id_atleta, String nome, String cognome, double stipendio, double gettonepresenzanazionale) {
+
+	public Atleta(String nome, String cognome, double stipendio,String id_atleta, double gettonePresenzaNazionale) {
 		super();
 		this.id_atleta = id_atleta;
 		Nome = nome;
 		Cognome = cognome;
 		Stipendio = stipendio;
-		GettonePresenzaNazionale = gettonepresenzanazionale;
+		GettonePresenzaNazionale = gettonePresenzaNazionale;
 	}
 
 	//Getter e Setter
-	public double getGettonePresenzaNazionale() {
-		return GettonePresenzaNazionale;
+
+	
+	public String toString() {
+		return "\nNome=" + Nome + ", Cognome=" + Cognome + ", Stipendio="
+				+ Stipendio + ", GettonePresenzaNazionale=" + GettonePresenzaNazionale + "\n";
+
 	}
 
-	public void setGettonePresenzaNazionale(double gettonePresenzaNazionale) {
-		GettonePresenzaNazionale = gettonePresenzaNazionale;
+	public double getGettonePresenzaNazionale() {
+		return GettonePresenzaNazionale;
 	}
 
 	public Procuratore getProc() {
 		return proc;
 	}
 
-	@Override
-	public String toString() {
-		return "Atleta nome=" + Nome + ", cognome=" + Cognome + ", stipendio=" + Stipendio
-				+ ", GettonePresenzaNazionale=" + GettonePresenzaNazionale;
-	}
-
-	public void setProc(Procuratore proc) {
-		this.proc = proc;
-	}
-
 	public String getNome() {
 		return Nome;
-	}
-
-	public void setNome(String nome) {
-		this.Nome = nome;
 	}
 
 	public String getCognome() {
 		return Cognome;
 	}
 
-	public void setCognome(String cognome) {
-		this.Cognome = cognome;
-	}
-
 	public double getStipendio() {
 		return Stipendio;
 	}
 
-	public void setStipendio(double stipendio) {
-		this.Stipendio = stipendio;
-	}
-
 	public String getId_atleta() {
 		return id_atleta;
-	}
-
-	public void setId_atleta(String id_atleta) {
-		this.id_atleta = id_atleta;
 	}
 	
 	

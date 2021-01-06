@@ -12,7 +12,6 @@ import Classi.Procuratore;
 import Daos.ProcuratoreDAO;
 
 public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
-	
     //Attributi
 	private Connection conn;
     private PreparedStatement getAtletaByProcuratorePS;
@@ -96,7 +95,7 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
     	ResultSet rs = getAtletaByProcuratorePS.executeQuery();
 		ArrayList<Atleta> atleti = new ArrayList<Atleta>();
 	    while(rs.next()) {
-	    	Atleta a = new Atleta(rs.getString("id_atleta"), rs.getString("nome"), rs.getString("cognome"), rs.getDouble("stipendio"), rs.getDouble("gettonepresenzanazionale"));
+	    	Atleta a = new Atleta(rs.getString("nome"), rs.getString("cognome"), rs.getDouble("stipendio"), rs.getString("id_atleta"),rs.getDouble("gettonepresenzanazionale"));
 	    	atleti.add(a);	
 	    }
 	    rs.close();

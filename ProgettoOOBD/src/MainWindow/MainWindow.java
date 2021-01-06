@@ -11,7 +11,9 @@ import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
 
 import Classi.Atleta;
+
 import Classi.Contratto;
+
 import LoginWindow.LoginWindow;
 import Controller.Controller;
 import DBConfiguration.DBTableCreation;
@@ -49,12 +51,17 @@ public class MainWindow extends JFrame {
     ArrayList<Contratto> ListaContratti;
 	
 	
+
 	public MainWindow(Controller temp,String nome, String cognome,int id, ArrayList<Atleta> lista){
+
+		ListaAtleti = lista;
 		Controller = temp;
 		Nome = nome;
 		Cognome = cognome;
 		ID = id;
+
 		ListaAtleti = lista;
+
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 966, 502);
