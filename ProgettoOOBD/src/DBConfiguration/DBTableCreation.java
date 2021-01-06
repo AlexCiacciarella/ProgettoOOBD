@@ -62,11 +62,11 @@ public class DBTableCreation {
 	}
 	
 	public List ControllaIdEPassword(String email, String password) throws SQLException{
-		String nome = null;
-		String cognome = null;
+		String nome,cognome;
+		int id;
 		List lista = new ArrayList<String>();
 		try{
-			PreparedStatement login =conn.prepareStatement("SELECT procuratore.email, procuratore.password, procuratore.nome, procuratore.cognome  "
+			PreparedStatement login =conn.prepareStatement("SELECT procuratore.id_procuratore, procuratore.password, procuratore.nome, procuratore.cognome  "
 					  									  +"FROM procuratore "
 					  									  +"WHERE procuratore.email = ? AND procuratore.password = ? ;");
 			login.setString(1, email);
@@ -76,10 +76,12 @@ public class DBTableCreation {
 				System.out.println("Accesso effettuato");
 				nome = rs.getString("nome");
 				cognome = rs.getString("cognome");
+				id = rs.getInt("id_procuratore");
 				ProblemiLogin = false;
 				System.out.println(nome);
 				lista.add(nome);
 				lista.add(cognome);
+				lista.add(id);
 				return lista;
 			}else
 			{

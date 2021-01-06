@@ -4,17 +4,18 @@ public class Contratto {
 	//attributi
 	private int Durata;
 	private double Guadagno;
-	private Atleta Atleta;
+	private String Nome, Cognome;
 	private String TipoContratto;
 	
 	
 	//costruttore
-	public Contratto(int durata, double guadagno, Atleta atleta, String tipocontratto) {
+	public Contratto(String nome, String cognome,int durata, double guadagno, String tipocontratto) {
 		super();
 		Durata = durata;
 		Guadagno = guadagno;
-		Atleta = atleta;
 		TipoContratto = tipocontratto;
+		Nome = nome;
+		Cognome = cognome;
 	}
 
 	//getter e setter
@@ -30,11 +31,22 @@ public class Contratto {
 	public void setGuadagno(double guadagno) {
 		Guadagno = guadagno;
 	}
-	public Atleta getAtleta() {
-		return Atleta;
+
+	public String getNome() {
+		return Nome;
 	}
-	public void setAtleta(Atleta contrattoAtleta) {
-		Atleta = contrattoAtleta;
+
+	public String getCognome() {
+		return Cognome;
 	}
+
+	@Override
+	public String toString() {
+		return "Contratto: Nome=" + Nome + ", Cognome=" + Cognome + ", Durata=" + Durata+ " mesi " + ", Guadagno=" + Guadagno
+				+ ", TipoContratto=" + TipoContratto;
+	}
+	
+
+	
     
 }

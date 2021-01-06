@@ -7,7 +7,7 @@ import Classi.Procuratore;
 
 public interface ProcuratoreDAO {
 	
-	public List<Contratto> getContratti();
+	public List<Contratto> getContratti(int id);
 	public Contratto getContrattoAtleta(Atleta atleta);
 	public List<Integer> getGettoniNaz(Atleta atleta);
 	public double PercentualeGuadagno(Contratto contratto);
