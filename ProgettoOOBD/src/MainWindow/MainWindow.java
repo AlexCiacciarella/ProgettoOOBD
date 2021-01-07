@@ -80,17 +80,17 @@ public class MainWindow extends JFrame {
 		WelcomeTextField.setText("Welcome " + nome + " " + cognome);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 115, 507, 328);
+		scrollPane.setBounds(408, 101, 507, 328);
 		ContentPanel.add(scrollPane);
 		
 		AtletaList = new JList();
-		AtletaList.setFont(new Font("Arial", Font.PLAIN, 14));
 		scrollPane.setViewportView(AtletaList);
+		AtletaList.setFont(new Font("Arial", Font.PLAIN, 14));
+		AtletaList.setModel(ListModel);
 		ListModel = new DefaultListModel();
 	    for(int i=0;i<ListaAtleti.size();i++) {
 	    	ListModel.addElement(ListaAtleti.get(i));
 	    }
-		AtletaList.setModel(ListModel);
 		
 		JButton BottoneContratti = new JButton("VIsualizza tutti i Contratti");
 		BottoneContratti.addActionListener(new ActionListener() {
@@ -103,7 +103,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		BottoneContratti.setFont(new Font("Arial", Font.BOLD, 14));
-		BottoneContratti.setBounds(599, 115, 255, 48);
+		BottoneContratti.setBounds(82, 101, 255, 48);
 		ContentPanel.add(BottoneContratti);
 		
 	}

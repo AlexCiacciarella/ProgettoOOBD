@@ -39,7 +39,7 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 			ResultSet rs = getContrattiPS.executeQuery();
 			while(rs.next())
 			{
-				Contratto c = new Contratto(rs.getString("nome"), rs.getString("cognome"),rs.getInt("durata"), rs.getDouble("guadagno"),rs.getString("tipocontratto"));
+				Contratto c = new Contratto(rs.getString("nome"), rs.getString("cognome"),rs.getInt("durata"), rs.getDouble("guadagno"),rs.getString("tipocontratto"), rs.getString("id_atleta"));
 				ListaContratti.add(c);
 			}
 			st.close();
@@ -51,30 +51,32 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 	}
 
 	@Override
-	public Contratto getContrattoAtleta(Atleta atleta) {
+	public List<Contratto> getContrattoAtleta(String id) {
+		String id_atleta = id;
+		List<Contratto> ContrattiAtleta = null;
 		try {
 			PreparedStatement getContrattoAtletaPS = conn.prepareStatement("SELECT * "
 																		 + "FROM contratto natural join atleta "
-																		 + "WHERE contratto.id_atleta = ' ? ' ");
-			Statement st = conn.createStatement();
+																		 + "WHERE contratto.id_atleta = '?' ");
+			getContrattoAtletaPS.setString(1, id_atleta);
 			ResultSet rs = getContrattoAtletaPS.executeQuery();
-			//da continuare
+			while(rs.next())
+			{
+				Contratto c = new Contratto(rs.getString("nome"), rs.getString("cognome"),rs.getInt("durata"), rs.getDouble("guadagno"),rs.getString("tipocontratto"), rs.getString("id_atleta"));
+				ContrattiAtleta.add(c);
+			}
+			rs.close();
+			return ContrattiAtleta;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Non è stato possibile trovari i contratti degli atleti : "+ e);
 		}
-		return null;
+		return ContrattiAtleta;
 	}
 
 	@Override
 	public List<Integer> getGettoniNaz(Atleta atleta) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public double PercentualeGuadagno(Contratto contratto) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
