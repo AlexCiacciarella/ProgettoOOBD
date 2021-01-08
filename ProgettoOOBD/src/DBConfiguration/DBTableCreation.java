@@ -117,6 +117,7 @@ public class DBTableCreation {
 										"  password VARCHAR(20) NOT NULL,"+
 										"  Nome VARCHAR(200) ,"+
 										"  Cognome VARCHAR(200),"+
+										"  Percentuale_Guadagno float,"+
 										"  Stipendio float,"+
 										"  PRIMARY KEY(id_Procuratore) ,"
 										+ "UNIQUE (id_Procuratore, email), "
@@ -173,8 +174,7 @@ public class DBTableCreation {
 							String sqlcommand = "CREATE TABLE Contratto"+
 												"( id_Contratto VARCHAR(10) not null,"+
 												"  Durata int not null,"+
-												"  Guadagno float not null,"+ 
-												"  Percentuale_guadagno_procuratore float not null"+
+												"  Guadagno float not null,"+
 												"  TipoContratto VARCHAR(7) not null,"+
 												"  id_Atleta VARCHAR(10),"+
 												"  PRIMARY KEY(id_Contratto));";

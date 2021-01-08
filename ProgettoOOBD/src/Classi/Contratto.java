@@ -6,7 +6,7 @@ public class Contratto {
 	private double Guadagno;
 	private String Nome, Cognome;
 	private String TipoContratto;
-	private String ID_Atleta;
+	private String Id_atleta;
 	
 	
 	//costruttore
@@ -17,7 +17,7 @@ public class Contratto {
 		TipoContratto = tipocontratto;
 		Nome = nome;
 		Cognome = cognome;
-		ID_Atleta = id_atleta;
+		Id_atleta = id_atleta;
 	}
 
 	//getter e setter
@@ -41,9 +41,9 @@ public class Contratto {
 	public String getCognome() {
 		return Cognome;
 	}
-
-	public String getID_Atleta() {
-		return ID_Atleta;
+	
+	public String getId_atleta() {
+		return Id_atleta;
 	}
 
 	@Override

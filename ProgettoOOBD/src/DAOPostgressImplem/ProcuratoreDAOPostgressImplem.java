@@ -51,26 +51,25 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 	}
 
 	@Override
-	public List<Contratto> getContrattoAtleta(String id) {
-		String id_atleta = id;
-		List<Contratto> ContrattiAtleta = null;
+	public List<Contratto> getContrattoAtleta(Atleta atleta) {
+		List<Contratto> ContrattiAtleta = new ArrayList<Contratto>();
 		try {
 			PreparedStatement getContrattoAtletaPS = conn.prepareStatement("SELECT * "
 																		 + "FROM contratto natural join atleta "
-																		 + "WHERE contratto.id_atleta = '?' ");
-			getContrattoAtletaPS.setString(1, id_atleta);
+																		 + "WHERE contratto.id_atleta = ' ? ' ");
+			Statement st = conn.createStatement();
 			ResultSet rs = getContrattoAtletaPS.executeQuery();
 			while(rs.next())
-			{
-				Contratto c = new Contratto(rs.getString("nome"), rs.getString("cognome"),rs.getInt("durata"), rs.getDouble("guadagno"),rs.getString("tipocontratto"), rs.getString("id_atleta"));
-				ContrattiAtleta.add(c);
-			}
-			rs.close();
-			return ContrattiAtleta;
+            {
+                Contratto c = new Contratto(rs.getString("nome"), rs.getString("cognome"),rs.getInt("durata"), rs.getDouble("guadagno"),rs.getString("tipocontratto"), rs.getString("id_atleta"));
+                ContrattiAtleta.add(c);
+            }
+            rs.close();
+            return ContrattiAtleta;
 		} catch (SQLException e) {
-			System.out.println("Non è stato possibile trovari i contratti degli atleti : "+ e);
+			System.out.println("Non è stato possibile ottenere i contratti degli atleti : "+e);
 		}
-		return ContrattiAtleta;
+		return null;
 	}
 
 	@Override
