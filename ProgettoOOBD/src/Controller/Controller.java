@@ -109,7 +109,6 @@ public class Controller {
     	  }else
     	  {
     		  JOptionPane.showMessageDialog(null, "ID o password sbagliati");
-    		  LoginWindow.getProcuratoreTextField().setText("");
     		  LoginWindow.getProcuratorePasswordField().setText("");
     	  }
       }
@@ -147,6 +146,18 @@ public class Controller {
 	  List<Contratto> lista = new ArrayList<Contratto>();
 	  lista = ProcuratoreDAO.getContratti(id);
 	  return (ArrayList<Contratto>) lista;
+  }
+  //da rivedere
+  public List Richiamalista(int id) {
+	  List lista = new ArrayList();
+	  lista = ProcuratoreDAO.getIntroitiAtleta(id);
+	  return lista;
+  }
+  
+  public Contratto RichiamaAtletaPiùRedditizio(int id) {
+	  Contratto c;
+	  c = ProcuratoreDAO.getAtletaPiùRedditizio(id);
+	  return c;
   }
 
 

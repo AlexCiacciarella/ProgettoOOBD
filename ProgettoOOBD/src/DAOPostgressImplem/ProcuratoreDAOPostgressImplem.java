@@ -51,7 +51,7 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 	}
 
 	@Override
-	public List<Contratto> getContrattoAtleta(Atleta atleta) {
+	public List<Contratto> getContrattoAtleta() {
 		List<Contratto> ContrattiAtleta = new ArrayList<Contratto>();
 		try {
 			PreparedStatement getContrattoAtletaPS = conn.prepareStatement("SELECT * "
@@ -73,14 +73,32 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 	}
 
 	@Override
-	public List<Integer> getGettoniNaz(Atleta atleta) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Atleta getAtletaPiùRedditizio(Procuratore procuratore) {
-		// TODO Auto-generated method stub
+	public List getIntroitiAtleta(int id) {
+		ArrayList aaaa = new ArrayList();
+		try {
+			PreparedStatement AtletaRedditizioPS = conn.prepareStatement("select contratto.id_atleta, atleta.nome, atleta.cognome,contratto.id_contratto, contratto.durata, contratto.guadagno, contratto.tipocontratto, contratto.nome_società "
+																		+"from contratto natural join atleta join procuratore on atleta.id_procuratore = procuratore.id_procuratore "
+																		+"      where atleta.id_procuratore = '?' "
+																		+"      group by contratto.id_atleta, contratto.id_contratto, atleta.nome, atleta.cognome "
+																		+"      order by contratto.id_atleta ");
+			AtletaRedditizioPS.setFloat(1, id);
+			ResultSet rs = AtletaRedditizioPS.executeQuery();
+			while(rs.next())
+			{
+				aaaa.add(rs.getString("id_atleta"));
+				aaaa.add(rs.getString("nome"));
+				aaaa.add(rs.getString("cognome"));
+				aaaa.add(rs.getString("id_contratto"));
+				aaaa.add(rs.getInt("durata"));
+				aaaa.add(rs.getDouble("guadagno"));
+				aaaa.add(rs.getString("tipocontratto"));
+				aaaa.add(rs.getString("nome_società"));
+			}
+			rs.close();
+			return aaaa;
+		} catch (SQLException e) {
+			System.out.println("Impossibile ottenere risultati dal database: "+e);
+		}
 		return null;
 	}
 
@@ -104,5 +122,22 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 		
 		}
 	
+	public Contratto getAtletaPiùRedditizio(int id) {
+		Contratto c = null;
+		try {
+			PreparedStatement getAtletaPS = conn.prepareStatement("select * "
+																+ "from contratto natural join atleta "
+																+ "where percentuale_guadagno_procuratore = (select max(percentuale_guadagno_procuratore) from contratto natural join atleta join procuratore on procuratore.id_procuratore = atleta.id_procuratore where procuratore.id_procuratore = ? )");
+			getAtletaPS.setInt(1, id);
+			ResultSet rs = getAtletaPS.executeQuery();
+			while(rs.next()) {
+			c = new Contratto(rs.getString("nome"), rs.getString("cognome"), rs.getInt("durata"), rs.getDouble("guadagno"), rs.getString("tipocontratto"), rs.getString("id_atleta"));
+			}
+			return c;
+		} catch (SQLException e) {
+			System.out.println("Non è stato possibile prende l'atleta più redditizio : "+ e);
+		}
+		return null;
+	}
 
 }

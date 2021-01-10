@@ -16,7 +16,7 @@ public class AtletaDAOPostgressImplem implements AtletaDAO {
 
 	@Override
 	public double getTotaleIntroito(Atleta atleta) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 

@@ -8,8 +8,8 @@ import Classi.Procuratore;
 public interface ProcuratoreDAO {
 	
 	public List<Contratto> getContratti(int id);
-	public List<Contratto> getContrattoAtleta(Atleta atleta);
-	public List<Integer> getGettoniNaz(Atleta atleta);
-	public Atleta getAtletaPiùRedditizio(Procuratore procuratore);
+	public List<Contratto> getContrattoAtleta();
+	public List getIntroitiAtleta(int id);
 	public Contratto getClubPiùRedditizio();
+	public Contratto getAtletaPiùRedditizio(int id);
 }

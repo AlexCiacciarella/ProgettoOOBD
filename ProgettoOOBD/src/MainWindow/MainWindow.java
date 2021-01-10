@@ -95,6 +95,8 @@ public class MainWindow extends JFrame {
 		JButton BottoneContratti = new JButton("VIsualizza tutti i Contratti");
 		BottoneContratti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ListModel.removeAllElements();
+				AtletaList.setModel(ListModel);
 				try {
 					RiempiLista(ID);
 				} catch (SQLException e1) {
@@ -106,6 +108,36 @@ public class MainWindow extends JFrame {
 		BottoneContratti.setBounds(599, 115, 255, 48);
 		ContentPanel.add(BottoneContratti);
 		
+		JButton Sorgenti_Introito_Button = new JButton("Mostra sorgenti introito giocatori");
+		Sorgenti_Introito_Button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListModel.removeAllElements();
+				AtletaList.setModel(ListModel);
+				//RiempiContratti(ID);
+			}
+		});
+		Sorgenti_Introito_Button.setHorizontalAlignment(SwingConstants.LEFT);
+		Sorgenti_Introito_Button.setFont(new Font("Arial", Font.BOLD, 14));
+		Sorgenti_Introito_Button.setBounds(599, 187, 255, 57);
+		ContentPanel.add(Sorgenti_Introito_Button);
+		
+		JButton btnNewButton = new JButton("Ottieni Atleta pi\u00F9 Redditizio");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListModel.removeAllElements();
+				AtletaList.setModel(ListModel);
+				try {
+					AtletaRedditizio(id);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton.setFont(new Font("Arial", Font.BOLD, 14));
+		btnNewButton.setBounds(596, 269, 258, 57);
+		ContentPanel.add(btnNewButton);
+		
 	}
 	
 	public void RiempiLista(int id) throws SQLException {
@@ -113,6 +145,13 @@ public class MainWindow extends JFrame {
 		for(int i=0;i<ListaContratti.size();i++) {
 	    	ListModel.addElement(ListaContratti.get(i).toString());
 	    }
+		AtletaList.setModel(ListModel);
+	}
+	
+	public void AtletaRedditizio(int id) throws SQLException{
+		Contratto c ;
+		c = Controller.RichiamaAtletaPiùRedditizio(id);
+		ListModel.addElement(c.toString());
 		AtletaList.setModel(ListModel);
 	}
 }
