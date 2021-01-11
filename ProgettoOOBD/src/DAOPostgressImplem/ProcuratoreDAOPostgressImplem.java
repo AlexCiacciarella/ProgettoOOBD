@@ -57,7 +57,6 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 			PreparedStatement getContrattoAtletaPS = conn.prepareStatement("SELECT * "
 																		 + "FROM contratto natural join atleta "
 																		 + "WHERE contratto.id_atleta = ' ? ' ");
-			Statement st = conn.createStatement();
 			ResultSet rs = getContrattoAtletaPS.executeQuery();
 			while(rs.next())
             {
@@ -73,32 +72,26 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 	}
 
 	@Override
-	public List getIntroitiAtleta(int id) {
-		ArrayList aaaa = new ArrayList();
+	public ArrayList getIntroitiAtleta(int id) {
+		int ID = id;
+	    ArrayList<Contratto> Introiti = new ArrayList<Contratto>();
 		try {
-			PreparedStatement AtletaRedditizioPS = conn.prepareStatement("select contratto.id_atleta, atleta.nome, atleta.cognome,contratto.id_contratto, contratto.durata, contratto.guadagno, contratto.tipocontratto, contratto.nome_società "
-																		+"from contratto natural join atleta join procuratore on atleta.id_procuratore = procuratore.id_procuratore "
-																		+"      where atleta.id_procuratore = '?' "
-																		+"      group by contratto.id_atleta, contratto.id_contratto, atleta.nome, atleta.cognome "
-																		+"      order by contratto.id_atleta ");
-			AtletaRedditizioPS.setFloat(1, id);
-			ResultSet rs = AtletaRedditizioPS.executeQuery();
+			PreparedStatement getIntroitiAtletaPS = conn.prepareStatement("SELECT atleta.nome,atleta.cognome,contratto.guadagno "
+					                                                    +  "FROM contratto natural join atleta join procuratore on atleta.id_procuratore = procuratore.id_procuratore "
+					                                                    +  "WHERE procuratore.id_procuratore = ? "
+					                                                    +  "GROUP BY atleta.nome,atleta.cognome,contratto.guadagno ");
+			getIntroitiAtletaPS.setInt(1, ID);
+			ResultSet rs = getIntroitiAtletaPS.executeQuery();
 			while(rs.next())
-			{
-				aaaa.add(rs.getString("id_atleta"));
-				aaaa.add(rs.getString("nome"));
-				aaaa.add(rs.getString("cognome"));
-				aaaa.add(rs.getString("id_contratto"));
-				aaaa.add(rs.getInt("durata"));
-				aaaa.add(rs.getDouble("guadagno"));
-				aaaa.add(rs.getString("tipocontratto"));
-				aaaa.add(rs.getString("nome_società"));
-			}
-			rs.close();
-			return aaaa;
+            {
+               Contratto c = new Contratto(rs.getString("nome"), rs.getString("cognome"), rs.getDouble("guadagno"));
+               Introiti.add(c);
+            }
+            rs.close();
+            return Introiti;
 		} catch (SQLException e) {
-			System.out.println("Impossibile ottenere risultati dal database: "+e);
-		}
+			System.out.println("Non è stato possibile ottenere le informazioni richieste: " + e);
+		} 
 		return null;
 	}
 

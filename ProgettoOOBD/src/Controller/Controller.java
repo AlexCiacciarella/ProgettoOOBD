@@ -147,12 +147,7 @@ public class Controller {
 	  lista = ProcuratoreDAO.getContratti(id);
 	  return (ArrayList<Contratto>) lista;
   }
-  //da rivedere
-  public List Richiamalista(int id) {
-	  List lista = new ArrayList();
-	  lista = ProcuratoreDAO.getIntroitiAtleta(id);
-	  return lista;
-  }
+  
   
   public Contratto RichiamaAtletaPiùRedditizio(int id) {
 	  Contratto c;
@@ -166,7 +161,11 @@ public class Controller {
 	  return c;
   }
 
-
+ public ArrayList<Contratto> RichiamaIntroitiAtleta(int id){
+	ArrayList Introiti = new ArrayList();
+	Introiti = ProcuratoreDAO.getIntroitiAtleta(id);
+    return Introiti;
+ }
 
 
    
