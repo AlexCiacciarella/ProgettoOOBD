@@ -103,8 +103,22 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 	}
 
 	@Override
-	public Contratto getClubPiùRedditizio() {
-		// TODO Auto-generated method stub
+	public Contratto getClubPiùRedditizio(int id) {
+		Contratto c = null;
+		try {
+			PreparedStatement ClubpiùRedditizio = conn.prepareStatement("select * "
+																	   +"from contratto "
+																	   +"where percentuale_guadagno_procuratore = (select max(contratto.percentuale_guadagno_procuratore) from contratto natural join atleta join procuratore on atleta.id_procuratore = procuratore.id_procuratore where procuratore.id_procuratore = ? and contratto.tipocontratto = 'Club')");
+			ClubpiùRedditizio.setInt(1, id);
+			ResultSet rs = ClubpiùRedditizio.executeQuery();
+			while(rs.next())
+			{
+				c = new Contratto(rs.getString("nome_società"), rs.getInt("durata") , rs.getDouble("guadagno"), rs.getString("tipocontratto"));
+			}
+			return c;
+		} catch (SQLException e) {
+			System.out.println("Non è stato possibile trovare il club più redditizio : "+ e);
+		}
 		return null;
 	}
 	

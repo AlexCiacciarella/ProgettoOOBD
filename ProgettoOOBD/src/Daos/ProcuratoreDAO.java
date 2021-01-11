@@ -10,6 +10,6 @@ public interface ProcuratoreDAO {
 	public List<Contratto> getContratti(int id);
 	public List<Contratto> getContrattoAtleta();
 	public List getIntroitiAtleta(int id);
-	public Contratto getClubPiùRedditizio();
+	public Contratto getClubPiùRedditizio(int id);
 	public Contratto getAtletaPiùRedditizio(int id);
 }

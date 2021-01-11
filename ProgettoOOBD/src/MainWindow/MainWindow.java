@@ -138,6 +138,22 @@ public class MainWindow extends JFrame {
 		btnNewButton.setBounds(596, 269, 258, 57);
 		ContentPanel.add(btnNewButton);
 		
+		JButton btnNewButton_1 = new JButton("Ottieni Club Pi\u00F9 Redditizio");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListModel.removeAllElements();
+				AtletaList.setModel(ListModel);
+				try {
+					ClubRedditizio(id);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 14));
+		btnNewButton_1.setBounds(599, 356, 255, 48);
+		ContentPanel.add(btnNewButton_1);
+		
 	}
 	
 	public void RiempiLista(int id) throws SQLException {
@@ -152,6 +168,13 @@ public class MainWindow extends JFrame {
 		Contratto c ;
 		c = Controller.RichiamaAtletaPiùRedditizio(id);
 		ListModel.addElement(c.toString());
+		AtletaList.setModel(ListModel);
+	}
+	
+	public void ClubRedditizio(int id) throws SQLException{
+		Contratto c;
+		c = Controller.RichiamaClubPiùRedditizio(id);
+		ListModel.addElement(c.toString2());
 		AtletaList.setModel(ListModel);
 	}
 }

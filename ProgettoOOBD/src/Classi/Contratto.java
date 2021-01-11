@@ -7,6 +7,7 @@ public class Contratto {
 	private String Nome, Cognome;
 	private String TipoContratto;
 	private String Id_atleta;
+	private String Nome_Società;
 	
 	
 	//costruttore
@@ -19,6 +20,18 @@ public class Contratto {
 		Cognome = cognome;
 		Id_atleta = id_atleta;
 	}
+	
+	
+
+	public Contratto(String nome_Società,int durata, double guadagno, String tipoContratto) {
+		super();
+		Durata = durata;
+		Guadagno = guadagno;
+		TipoContratto = tipoContratto;
+		Nome_Società = nome_Società;
+	}
+
+
 
 	//getter e setter
 	public int getDurata() {
@@ -46,12 +59,21 @@ public class Contratto {
 		return Id_atleta;
 	}
 
+	public String getNome_Società() {
+		return Nome_Società;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Contratto: Nome=" + Nome + ", Cognome=" + Cognome + ", Durata=" + Durata+ " mesi " + ", Guadagno=" + Guadagno
 				+ ", TipoContratto=" + TipoContratto;
 	}
 	
+	public String toString2() {
+		return "Contratto : Nome Società= "+ Nome_Società + ", Durata= "+ Durata + ", Guadagno= "+ Guadagno+ ", Tipo Contratto= "+ TipoContratto;
+	}
 
 	
     

@@ -159,6 +159,12 @@ public class Controller {
 	  c = ProcuratoreDAO.getAtletaPiùRedditizio(id);
 	  return c;
   }
+  
+  public Contratto RichiamaClubPiùRedditizio(int id) {
+	  Contratto c;
+	  c = ProcuratoreDAO.getClubPiùRedditizio(id);
+	  return c;
+  }
 
 
 
