@@ -64,14 +64,14 @@ public class MainWindow extends JFrame {
 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 966, 502);
+		setBounds(100, 100, 1187, 674);
 		ContentPanel = new JPanel();
 		ContentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(ContentPanel);
 		ContentPanel.setLayout(null);
 		
 		WelcomeTextField = new JTextField();
-		WelcomeTextField.setBounds(277, 0, 381, 48);
+		WelcomeTextField.setBounds(430, 0, 381, 48);
 		WelcomeTextField.setHorizontalAlignment(SwingConstants.CENTER);
 		WelcomeTextField.setFont(new Font("Arial", Font.BOLD, 14));
 		WelcomeTextField.setEditable(false);
@@ -80,7 +80,7 @@ public class MainWindow extends JFrame {
 		WelcomeTextField.setText("Welcome " + nome + " " + cognome);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 115, 507, 328);
+		scrollPane.setBounds(12, 115, 1077, 197);
 		ContentPanel.add(scrollPane);
 		
 		AtletaList = new JList();
@@ -105,7 +105,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		BottoneContratti.setFont(new Font("Arial", Font.BOLD, 14));
-		BottoneContratti.setBounds(599, 115, 255, 48);
+		BottoneContratti.setBounds(12, 363, 255, 48);
 		ContentPanel.add(BottoneContratti);
 		
 		JButton Sorgenti_Introito_Button = new JButton("Mostra sorgenti introito giocatori");
@@ -118,7 +118,7 @@ public class MainWindow extends JFrame {
 		});
 		Sorgenti_Introito_Button.setHorizontalAlignment(SwingConstants.LEFT);
 		Sorgenti_Introito_Button.setFont(new Font("Arial", Font.BOLD, 14));
-		Sorgenti_Introito_Button.setBounds(599, 187, 255, 57);
+		Sorgenti_Introito_Button.setBounds(839, 363, 255, 44);
 		ContentPanel.add(Sorgenti_Introito_Button);
 		
 		JButton btnNewButton = new JButton("Ottieni Atleta pi\u00F9 Redditizio");
@@ -135,7 +135,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Arial", Font.BOLD, 14));
-		btnNewButton.setBounds(596, 269, 258, 57);
+		btnNewButton.setBounds(553, 363, 258, 44);
 		ContentPanel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Ottieni Club Pi\u00F9 Redditizio");
@@ -151,7 +151,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 14));
-		btnNewButton_1.setBounds(599, 356, 255, 48);
+		btnNewButton_1.setBounds(277, 363, 255, 48);
 		ContentPanel.add(btnNewButton_1);
 		
 	}
