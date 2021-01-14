@@ -1,4 +1,4 @@
-package DAOPostgressImplem;
+package DAOPostgresImplem;
 
 import java.sql.*;
 import Controller.Controller;
@@ -11,21 +11,20 @@ import Classi.Contratto;
 import Classi.Procuratore;
 import Daos.ProcuratoreDAO;
 
-public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
+public class ProcuratoreDAOPostgresImplem implements ProcuratoreDAO {
     //Attributi
 	private Connection conn;
     private PreparedStatement getAtletaByProcuratorePS;
-    Controller Controller;
+    private Controller Controller;
     
     //Costruttore
-	public ProcuratoreDAOPostgressImplem(Connection Connection,Controller temp) throws SQLException {
+	public ProcuratoreDAOPostgresImplem(Connection Connection,Controller temp) throws SQLException {
 		this.conn=Connection;
 		this.Controller = temp;
 	}
 
 	//Metodi
 	@Override
-	//FINITO
 	public List<Contratto> getContratti(int id) {
 		int ID = id;
 		ArrayList<Contratto> ListaContratti = new ArrayList<Contratto>();
@@ -49,7 +48,6 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 		}
 		return ListaContratti;
 	}
-
 	@Override
 	public List<Contratto> getContrattoAtleta() {
 		List<Contratto> ContrattiAtleta = new ArrayList<Contratto>();
@@ -70,7 +68,6 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 		}
 		return null;
 	}
-
 	@Override
 	public ArrayList getIntroitiAtleta(int id) {
 		int ID = id;
@@ -90,11 +87,10 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
             rs.close();
             return Introiti;
 		} catch (SQLException e) {
-			System.out.println("Non è stato possibile ottenere le informazioni richieste: " + e);
+			System.out.println("Non è stato possibile ottenere le informazioni sugli introiti dell'atleta: " + e);
 		} 
 		return null;
-	}
-
+	 }
 	@Override
 	public Contratto getClubPiùRedditizio(int id) {
 		Contratto c = null;
@@ -113,8 +109,7 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 			System.out.println("Non è stato possibile trovare il club più redditizio : "+ e);
 		}
 		return null;
-	}
-	
+	 }
 	public ArrayList<Atleta> getAtletaByProcuratore(int id_proc) throws SQLException {
 		getAtletaByProcuratorePS = conn.prepareStatement("SELECT * FROM atleta WHERE id_procuratore = ? ");
 		getAtletaByProcuratorePS.setInt(1,id_proc);
@@ -127,8 +122,7 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 	    rs.close();
         return atleti;
 		
-		}
-	
+	 }
 	public Contratto getAtletaPiùRedditizio(int id) {
 		Contratto c = null;
 		try {
@@ -142,9 +136,9 @@ public class ProcuratoreDAOPostgressImplem implements ProcuratoreDAO {
 			}
 			return c;
 		} catch (SQLException e) {
-			System.out.println("Non è stato possibile prende l'atleta più redditizio : "+ e);
+			System.out.println("Non è stato possibile trovare l'atleta più redditizio : "+ e);
 		}
 		return null;
-	}
+    }
 
 }

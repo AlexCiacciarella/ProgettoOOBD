@@ -21,31 +21,25 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class ConnessioneAlDatabase extends JFrame {
-
+    //attributi
 	private JPanel contentPane;
 	private JTextField CaricamentoTextField;
 	private JButton ToLoginButton;
+	private Controller c;
 	
-	
+	//getter e setter
 	public JTextField getCaricamentoTextField() {
 		return CaricamentoTextField;
 	}
-
 	public void setCaricamentoTextField(JTextField caricamentoTextField) {
 
 		CaricamentoTextField = caricamentoTextField;
 	}
-	
-	
-
 	public JButton getToLoginButton() {
 		return ToLoginButton;
 	}
-
-
-	private Controller c;
-
 	
+	//Costruttore
 	public ConnessioneAlDatabase(Controller temp) {
 		c = temp;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

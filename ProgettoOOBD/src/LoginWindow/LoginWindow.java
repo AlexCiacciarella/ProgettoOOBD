@@ -22,15 +22,16 @@ import java.awt.event.ActionEvent;
 import Controller.Controller;
 
 public class LoginWindow extends JFrame {
-	MainWindow driver;
-	Controller Controller;
+	//attributi
+	private MainWindow driver;
+	private Controller Controller;
 	private JPanel MainContentPanel;
 	private JTextField ProcuratoreTextField;
 	private JPasswordField ProcuratorePasswordField;
     
 	
 	
-	
+	//costruttore
 	public LoginWindow(Controller temp) {
 		Controller = temp;
 		setFont(new Font("Arial", Font.PLAIN, 14));
@@ -68,12 +69,6 @@ public class LoginWindow extends JFrame {
 				{
 					System.out.println(a);
 				}
-//			    Controller.MainWindowSpawn();
-//			    try {
-//					Controller.ShutDownLoginWindow();
-//				}catch (SQLException e1) {
-//					
-//				}
 			}
 		});
 		LoginButton.setFont(new Font("Arial", Font.BOLD, 14));
@@ -88,43 +83,26 @@ public class LoginWindow extends JFrame {
 
 
 
-
+    //getter e setter
 	public JPanel getMainContentPanel() {
 		return MainContentPanel;
 	}
-
-
-
-
 	public void setMainContentPanel(JPanel mainContentPanel) {
 		MainContentPanel = mainContentPanel;
 	}
-
-
-
-
 	public JTextField getProcuratoreTextField() {
 		return ProcuratoreTextField;
 	}
-
-
-
-
 	public void setProcuratoreTextField(JTextField procuratoreTextField) {
 		ProcuratoreTextField = procuratoreTextField;
 	}
-
-
-
-
 	public JPasswordField getProcuratorePasswordField() {
 		return ProcuratorePasswordField;
 	}
-
-
-
-
 	public void setProcuratorePasswordField(JPasswordField procuratorePasswordField) {
 		ProcuratorePasswordField = procuratorePasswordField;
 	}
+
+
+
 }

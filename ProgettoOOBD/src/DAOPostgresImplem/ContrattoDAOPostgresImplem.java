@@ -1,4 +1,4 @@
-package DAOPostgressImplem;
+package DAOPostgresImplem;
 
 import Daos.ContrattoDAO;
 

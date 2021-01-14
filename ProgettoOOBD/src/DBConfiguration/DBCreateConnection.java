@@ -5,7 +5,7 @@ import java.sql.*;
 import Controller.Controller;
 
 public class DBCreateConnection {
-	
+	//attributi
 	private static DBCreateConnection istanza;
 	private Connection Connessione;
 	private String IP = "rogue.db.elephantsql.com";
@@ -15,7 +15,7 @@ public class DBCreateConnection {
 	public Controller c;
 	public boolean Controllo = false;
 	
-	
+	//costruttore
 	public DBCreateConnection(Controller temp) throws SQLException {
 		//Caricamento del Driver
 		c = temp;
@@ -32,9 +32,9 @@ public class DBCreateConnection {
 		{
 			System.out.println("La connessione non è stata trovata con errore: "+ noconn);
 		}
-		//System.out.println("Programma eseguito");
 	}
 
+	//getter e setter
 	public Connection getConnessione() {
 		return Connessione;
 	}
@@ -42,17 +42,7 @@ public class DBCreateConnection {
 
 	
 	
-//	public DBCreateConnection getInstance() throws SQLException{
-//		if(istanza == null)
-//		{
-//			istanza = new DBCreateConnection(c);
-//		}
-//		else if (istanza.getConnection().is)
-//		{
-//			
-//		}
-//	}
-//	
+	
 	
 
 }

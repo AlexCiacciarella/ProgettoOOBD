@@ -39,19 +39,20 @@ import javax.swing.ListSelectionModel;
 import javax.swing.AbstractListModel;
 
 public class MainWindow extends JFrame {
-	int ID;
-	LoginWindow LoginWindow;
-	String Nome, Cognome;
+	//attributi
+	private int ID;
+	private LoginWindow LoginWindow;
+	private String Nome, Cognome;
 	private JPanel ContentPanel;
 	private JTextField WelcomeTextField;
-	JList AtletaList = null;
-	DefaultListModel ListModel = null;
-    Controller Controller;
-    ArrayList<Atleta> ListaAtleti;
-    ArrayList<Contratto> ListaContratti;
-	ArrayList<Contratto> ListaIntroiti;
+	private JList AtletaList = null;
+	private DefaultListModel ListModel = null;
+    private Controller Controller;
+    private ArrayList<Atleta> ListaAtleti;
+    private ArrayList<Contratto> ListaContratti;
+	private ArrayList<Contratto> ListaIntroiti;
 	
-
+    //costruttore
 	public MainWindow(Controller temp,String nome, String cognome,int id, ArrayList<Atleta> lista){
 
 		ListaAtleti = lista;
@@ -77,7 +78,7 @@ public class MainWindow extends JFrame {
 		WelcomeTextField.setEditable(false);
 		ContentPanel.add(WelcomeTextField);
 		WelcomeTextField.setColumns(10);
-		WelcomeTextField.setText("Welcome " + nome + " " + cognome);
+		WelcomeTextField.setText("Benvenuto " + nome + " " + cognome);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(12, 115, 1077, 197);
@@ -92,7 +93,7 @@ public class MainWindow extends JFrame {
 	    }
 		AtletaList.setModel(ListModel);
 		
-		JButton BottoneContratti = new JButton("VIsualizza tutti i Contratti");
+		JButton BottoneContratti = new JButton("Visualizza tutti i Contratti");
 		BottoneContratti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListModel.removeAllElements();
@@ -160,6 +161,7 @@ public class MainWindow extends JFrame {
 		
 	}
 	
+	//metodi
 	public void RiempiLista(int id) throws SQLException {
 		ListaContratti = Controller.RichiamaListaContratti(id);
 		for(int i=0;i<ListaContratti.size();i++) {
@@ -167,28 +169,25 @@ public class MainWindow extends JFrame {
 	    }
 		AtletaList.setModel(ListModel);
 	}
-	
 	public void AtletaRedditizio(int id) throws SQLException{
 		Contratto c ;
 		c = Controller.RichiamaAtletaPiùRedditizio(id);
 		ListModel.addElement(c.toString());
 		AtletaList.setModel(ListModel);
 	}
-	
 	public void ClubRedditizio(int id) throws SQLException{
 		Contratto c;
 		c = Controller.RichiamaClubPiùRedditizio(id);
 		ListModel.addElement(c.toString2());
 		AtletaList.setModel(ListModel);
 	}
-	
-	   public void IntroitiAtleta(int id) throws SQLException{
+	public void IntroitiAtleta(int id) throws SQLException{
 		 ListaIntroiti = Controller.RichiamaIntroitiAtleta(id); 
 			for(int i=0;i<ListaIntroiti.size();i++) {
 		    	ListModel.addElement(ListaIntroiti.get(i).toString3());
 		    }
 			AtletaList.setModel(ListModel);
-	   }
+	}
 
 }
 

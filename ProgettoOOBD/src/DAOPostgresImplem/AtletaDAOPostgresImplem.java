@@ -1,4 +1,4 @@
-package DAOPostgressImplem;
+package DAOPostgresImplem;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import Classi.Atleta;
 import Classi.Contratto;
 import Daos.AtletaDAO;
 
-public class AtletaDAOPostgressImplem implements AtletaDAO {
+public class AtletaDAOPostgresImplem implements AtletaDAO {
 
 	@Override
 	public double getTotGettoniPresenza(Atleta atleta) {

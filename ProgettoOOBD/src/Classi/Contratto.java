@@ -10,7 +10,7 @@ public class Contratto {
 	private String Nome_Società;
 	
 	
-	//costruttore
+	//costruttori
 	public Contratto(String nome, String cognome,int durata, double guadagno, String tipocontratto, String id_atleta) {
 		super();
 		Durata = durata;
@@ -19,15 +19,13 @@ public class Contratto {
 		Nome = nome;
 		Cognome = cognome;
 		Id_atleta = id_atleta;
-	}
-	
+	}	
 	public Contratto(String nome, String cognome,double guadagno) {
 		super();
 		Nome = nome;
 		Cognome = cognome;
 		Guadagno = guadagno;
 	}
-
 	public Contratto(String nome_Società,int durata, double guadagno, String tipoContratto) {
 		super();
 		Durata = durata;
@@ -51,35 +49,29 @@ public class Contratto {
 	public void setGuadagno(double guadagno) {
 		Guadagno = guadagno;
 	}
-
 	public String getNome() {
 		return Nome;
 	}
-
 	public String getCognome() {
 		return Cognome;
 	}
-	
 	public String getId_atleta() {
 		return Id_atleta;
 	}
-
 	public String getNome_Società() {
 		return Nome_Società;
 	}
 
 
 
-	@Override
+	//metodi
 	public String toString() {
 		return "Contratto: Nome=" + Nome + ", Cognome=" + Cognome + ", Durata=" + Durata+ " mesi " + ", Guadagno=" + Guadagno
 				+ ", TipoContratto=" + TipoContratto;
 	}
-	
 	public String toString2() {
 		return "Contratto : Nome Società= "+ Nome_Società + ", Durata= "+ Durata + ", Guadagno= "+ Guadagno+ ", Tipo Contratto= "+ TipoContratto;
 	}
-
 	public String toString3() {
 		return "Contratto: Nome=" + Nome + ", Cognome= " + Cognome +  ", Guadagno=" + Guadagno;
 	}

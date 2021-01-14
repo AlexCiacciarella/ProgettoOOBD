@@ -8,30 +8,21 @@ import Controller.Controller;
 import MainWindow.MainWindow;
 
 public class DBTableCreation {
-	
-	Connection conn;
-	DBCreateConnection dbconnection;
-	Controller c;
+	//attributi
+	private Connection conn;
+	private DBCreateConnection dbconnection;
+	private Controller c;
     private boolean ProblemiCreazione = false;
     private boolean ProblemiVincoli = false;
     private boolean ProblemiLogin = false;
 	
     //getter e setter
-    
-    
-    
     public boolean isProblemiCreazione() {
 		return ProblemiCreazione;
 	}
-    
-    
-    
     public boolean isProblemiLogin() {
 		return ProblemiLogin;
 	}
-
-
-
 	public boolean isProblemiVincoli() {
 		return ProblemiVincoli;
 	}
@@ -49,7 +40,6 @@ public class DBTableCreation {
 		}else
 			return true;
 	}
-	
 	public boolean TableExists(String Tbl_name) throws SQLException {
 		DatabaseMetaData dbm = conn.getMetaData();
 		ResultSet tables = dbm.getTables(null, null, Tbl_name, null);
@@ -60,7 +50,6 @@ public class DBTableCreation {
 			 return false;
 		}
 	}
-	
 	public List ControllaIdEPassword(String email, String password) throws SQLException{
 		String nome,cognome;
 		int id;
@@ -96,13 +85,6 @@ public class DBTableCreation {
 		return lista;
 		
 	}
-
-
-	public void FunzionePerIVincoli() {
-		Statement st;
-			
-	}
-
 	public void CreaTabellaProcuratore()
 	{
 		Statement statement = null;
@@ -134,7 +116,6 @@ public class DBTableCreation {
 			
 		}
 	}
-	
 	public void CreaTabellaAtleta()
 	{
 		Statement statement = null;
@@ -161,10 +142,9 @@ public class DBTableCreation {
 				System.out.println("C'è stato un problema a creare la tabella Atleta : "+ e);
 			}
 		}
-	}
-			
-			public void CreaTabellaContratto()
-			{
+	}		
+	public void CreaTabellaContratto()
+	{
 				Statement statement = null;
 				if(ConnectionExists())
 				{
@@ -190,9 +170,8 @@ public class DBTableCreation {
 				
 				}
 			
-			}
-			
-			public void CreaVincoliTabelle() throws SQLException {
+		}
+	public void CreaVincoliTabelle() throws SQLException {
 				Statement statement = null;
 				try {
 					statement = conn.createStatement();

@@ -10,7 +10,7 @@ import javax.swing.*;
 import Caricamento.ConnessioneAlDatabase;
 import Classi.Atleta;
 import Classi.Contratto;
-import DAOPostgressImplem.ProcuratoreDAOPostgressImplem;
+import DAOPostgresImplem.ProcuratoreDAOPostgresImplem;
 import DBConfiguration.DBCreateConnection;
 import DBConfiguration.DBTableCreation;
 import LoginWindow.LoginWindow;
@@ -18,16 +18,15 @@ import MainWindow.MainWindow;
 
 public class Controller {
 	  //attributi
-	  LoginWindow LoginWindow;
-      MainWindow FinestraPrincipale;     
-      ConnessioneAlDatabase firstgui;
-      Connection connessione;
-      DBCreateConnection connessionedb;
-      DBTableCreation Tablebuilder;
-      
-      ProcuratoreDAOPostgressImplem ProcuratoreDAO;
-      Contratto con;
-      ArrayList<Atleta> ListaAtleti = new ArrayList<Atleta>();
+	 private LoginWindow LoginWindow;
+     private MainWindow FinestraPrincipale;     
+     private ConnessioneAlDatabase firstgui;
+     private Connection connessione;
+     private DBCreateConnection connessionedb;
+     private DBTableCreation Tablebuilder;
+     private ProcuratoreDAOPostgresImplem ProcuratoreDAO;
+     private Contratto con;
+     private ArrayList<Atleta> ListaAtleti = new ArrayList<Atleta>();
       
       //main
       public static void main(String[] args) throws SQLException {
@@ -44,16 +43,15 @@ public class Controller {
       
       //metodi
 	  public void MainWindowSpawn(String nome, String cognome,int id) throws SQLException{
-    	ProcuratoreDAO = new ProcuratoreDAOPostgressImplem(this.connessione,this);
+    	ProcuratoreDAO = new ProcuratoreDAOPostgresImplem(this.connessione,this);
     	ArrayList<Atleta> ListaAtleti = new ArrayList<Atleta>();
-    	ProcuratoreDAO = new ProcuratoreDAOPostgressImplem(this.connessione,this);
+    	ProcuratoreDAO = new ProcuratoreDAOPostgresImplem(this.connessione,this);
     	ListaAtleti = ProcuratoreDAO.getAtletaByProcuratore(id);
     	System.out.println(ListaAtleti);
     	FinestraPrincipale = new MainWindow(this, nome, cognome,id,ListaAtleti);
   		FinestraPrincipale.setVisible(true);	
   		
-  	}
-      
+  	  }   
       public void onFirstGui() throws SQLException{
     	  firstgui = new ConnessioneAlDatabase(this);
     	  firstgui.setVisible(true);
@@ -77,11 +75,10 @@ public class Controller {
         	  }
             		  
     		  
-    	  }
+       }
     	  
     	  
-      }
-      
+      } 
       public void CaricamentoToLogin() throws SQLException {
     	  if(connessionedb.Controllo)
     	  {
@@ -91,7 +88,6 @@ public class Controller {
     	  }
     	  
       }
-      
       public void ControlloLogin(String email, String pass) throws SQLException{
     	  String nome, cognome;
     	  int id = 0;
@@ -112,60 +108,49 @@ public class Controller {
     		  LoginWindow.getProcuratorePasswordField().setText("");
     	  }
       }
-
-    public void ShutDownLoginWindow() throws SQLException {
+      public void ShutDownLoginWindow() throws SQLException {
     	LoginWindow.setVisible(false);
-    }
-    
-    public void PassaConnessioneATableBuilder() {
+      }  
+      public void PassaConnessioneATableBuilder() {
    		connessione = connessionedb.getConnessione();
    		Tablebuilder = new DBTableCreation(connessione, this);
-    }
-    
-  public void RichiamaCreazioneProcuratore() throws SQLException{
+      }
+      public void RichiamaCreazioneProcuratore() throws SQLException{
 	  	PassaConnessioneATableBuilder();
    		Tablebuilder.CreaTabellaProcuratore();
-   }
-  
-  public void RichiamaCreazioneAtleta() throws SQLException{
+      }
+      public void RichiamaCreazioneAtleta() throws SQLException{
 	  PassaConnessioneATableBuilder();
 	  Tablebuilder.CreaTabellaAtleta();
-  }
-  
-  public void RichiamaCreazioneContratto() throws SQLException{
+      }
+      public void RichiamaCreazioneContratto() throws SQLException{
 	  PassaConnessioneATableBuilder();
 	  Tablebuilder.CreaTabellaContratto();
-  }
-  
-  public void RichiamaCreaVincoli() throws SQLException{
+      }
+      public void RichiamaCreaVincoli() throws SQLException{
 	  PassaConnessioneATableBuilder();
 	  Tablebuilder.CreaVincoliTabelle();
-  }
-  
-  public ArrayList<Contratto> RichiamaListaContratti(int id) throws SQLException{
+      }
+      public ArrayList<Contratto> RichiamaListaContratti(int id) throws SQLException{
 	  List<Contratto> lista = new ArrayList<Contratto>();
 	  lista = ProcuratoreDAO.getContratti(id);
 	  return (ArrayList<Contratto>) lista;
-  }
-  
-  
-  public Contratto RichiamaAtletaPiùRedditizio(int id) {
+      }
+      public Contratto RichiamaAtletaPiùRedditizio(int id) {
 	  Contratto c;
 	  c = ProcuratoreDAO.getAtletaPiùRedditizio(id);
 	  return c;
-  }
-  
-  public Contratto RichiamaClubPiùRedditizio(int id) {
+      } 
+      public Contratto RichiamaClubPiùRedditizio(int id) {
 	  Contratto c;
 	  c = ProcuratoreDAO.getClubPiùRedditizio(id);
 	  return c;
-  }
-
- public ArrayList<Contratto> RichiamaIntroitiAtleta(int id){
-	ArrayList Introiti = new ArrayList();
-	Introiti = ProcuratoreDAO.getIntroitiAtleta(id);
-    return Introiti;
- }
+      }
+      public ArrayList<Contratto> RichiamaIntroitiAtleta(int id){
+	    ArrayList Introiti = new ArrayList();
+	    Introiti = ProcuratoreDAO.getIntroitiAtleta(id);
+        return Introiti;
+      }
 
 
    
