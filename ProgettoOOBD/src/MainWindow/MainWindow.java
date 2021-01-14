@@ -89,7 +89,7 @@ public class MainWindow extends JFrame {
 		scrollPane.setViewportView(AtletaList);
 		ListModel = new DefaultListModel();
 	    for(int i=0;i<ListaAtleti.size();i++) {
-	    	ListModel.addElement(ListaAtleti.get(i));
+	    	ListModel.addElement(ListaAtleti.get(i).toString());
 	    }
 		AtletaList.setModel(ListModel);
 		
@@ -123,7 +123,7 @@ public class MainWindow extends JFrame {
 		});
 		Sorgenti_Introito_Button.setHorizontalAlignment(SwingConstants.LEFT);
 		Sorgenti_Introito_Button.setFont(new Font("Arial", Font.BOLD, 14));
-		Sorgenti_Introito_Button.setBounds(839, 363, 255, 44);
+		Sorgenti_Introito_Button.setBounds(839, 363, 277, 44);
 		ContentPanel.add(Sorgenti_Introito_Button);
 		
 		JButton btnNewButton = new JButton("Ottieni Atleta pi\u00F9 Redditizio");
@@ -134,7 +134,7 @@ public class MainWindow extends JFrame {
 				try {
 					AtletaRedditizio(id);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 			}
@@ -158,6 +158,20 @@ public class MainWindow extends JFrame {
 		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 14));
 		btnNewButton_1.setBounds(277, 363, 255, 48);
 		ContentPanel.add(btnNewButton_1);
+		
+		JButton MostraAtleti = new JButton("Mostra tutti gli atleti");
+		MostraAtleti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListModel = new DefaultListModel();
+			    for(int i=0;i<ListaAtleti.size();i++) {
+			    	ListModel.addElement(ListaAtleti.get(i).toString());
+			    }
+				AtletaList.setModel(ListModel);
+			}
+		});
+		MostraAtleti.setFont(new Font("Arial", Font.BOLD, 14));
+		MostraAtleti.setBounds(12, 437, 255, 48);
+		ContentPanel.add(MostraAtleti);
 		
 	}
 	
@@ -188,6 +202,5 @@ public class MainWindow extends JFrame {
 		    }
 			AtletaList.setModel(ListModel);
 	}
-
 }
 
