@@ -151,7 +151,9 @@ public class Controller {
 	    Introiti = ProcuratoreDAO.getIntroitiAtleta(id);
         return Introiti;
       }
-
+      public void RichiamoLogOut() throws SQLException {
+    	  CaricamentoToLogin();
+      }
 
    
   

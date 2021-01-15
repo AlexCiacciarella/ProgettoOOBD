@@ -64,7 +64,7 @@ public class LoginWindow extends JFrame {
 		LoginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				try {
-				Controller.ControlloLogin(getProcuratoreTextField().getText(), getProcuratorePasswordField().getText());;
+				    Controller.ControlloLogin(getProcuratoreTextField().getText(), getProcuratorePasswordField().getText());;
 				}catch(SQLException a)
 				{
 					System.out.println(a);
