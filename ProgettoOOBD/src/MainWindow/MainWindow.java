@@ -50,9 +50,7 @@ public class MainWindow extends JFrame {
 	private JList AtletaList = null;
 	private DefaultListModel ListModel = null;
     private Controller Controller;
-    private ArrayList<Atleta> ListaAtleti;
-    private ArrayList<Contratto> ListaContratti;
-	private ArrayList<Contratto> ListaIntroiti;
+ 
 	
     //costruttore
 	public MainWindow(Controller temp,String nome, String cognome,int id){

@@ -26,7 +26,7 @@ public class Controller {
      private DBTableCreation Tablebuilder;
      private ProcuratoreDAOPostgresImplem ProcuratoreDAO;
      private Contratto con;
-     private ArrayList<Atleta> ListaAtleti = new ArrayList<Atleta>();
+     
       
       //main
       public static void main(String[] args) throws  SQLException {
