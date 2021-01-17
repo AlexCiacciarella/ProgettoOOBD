@@ -50,6 +50,9 @@ public class MainWindow extends JFrame {
 	private JList AtletaList = null;
 	private DefaultListModel ListModel = null;
     private Controller Controller;
+    private ArrayList<Atleta> ListaAtleti;
+    private ArrayList<Contratto> ListaContratti;
+	private ArrayList<Contratto> ListaIntroiti;
 	
     //costruttore
 	public MainWindow(Controller temp,String nome, String cognome,int id){
@@ -165,8 +168,23 @@ public class MainWindow extends JFrame {
 		MostraAtleti.setBounds(12, 437, 255, 48);
 		ContentPanel.add(MostraAtleti);
 		
+		JButton LogOutButton = new JButton("Log out");
+		LogOutButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					LogOut();
+				} catch (SQLException e1) {
+					System.out.println("Errore durante il log out");
+				}
+			}
+		});
+		LogOutButton.setFont(new Font("Arial", Font.BOLD, 14));
+		LogOutButton.setBounds(522, 444, 157, 48);
+		ContentPanel.add(LogOutButton);
+		
 	}
 	
+			
 	//metodi
 	public void RiempiLista(int id) throws SQLException {
 		ListModel.removeAllElements();
@@ -206,5 +224,12 @@ public class MainWindow extends JFrame {
 	    }
 		AtletaList.setModel(ListModel);
 	}
+
+    public void LogOut() throws SQLException {
+  	  ListModel.removeAllElements();
+  	  AtletaList.setModel(ListModel);
+  	  this.setVisible(false);
+  	  Controller.RichiamoLogOut();
+    }
 }
 

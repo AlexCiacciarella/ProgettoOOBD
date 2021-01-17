@@ -151,20 +151,14 @@ public class Controller {
 	    Introiti = ProcuratoreDAO.getIntroitiAtleta(id);
         return Introiti;
       }
-      
       public ArrayList<Atleta> RichiamaListaAtleti(int id) throws SQLException{
     	  ArrayList<Atleta> Atleti = new ArrayList();
     	  Atleti = ProcuratoreDAO.getAtletaByProcuratore(id);
     	  return Atleti;
       }
 
-
+      public void RichiamoLogOut() throws SQLException {
+    	  CaricamentoToLogin();
+      }
    
-  
-	
-       
-
-	
-    
-
 }
