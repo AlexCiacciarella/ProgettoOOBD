@@ -29,7 +29,7 @@ public class Controller {
      private ArrayList<Atleta> ListaAtleti = new ArrayList<Atleta>();
       
       //main
-      public static void main(String[] args) throws SQLException {
+      public static void main(String[] args) throws  SQLException {
     	  Controller c = new Controller();
     	  
       }
@@ -48,7 +48,7 @@ public class Controller {
     	ProcuratoreDAO = new ProcuratoreDAOPostgresImplem(this.connessione,this);
     	ListaAtleti = ProcuratoreDAO.getAtletaByProcuratore(id);
     	System.out.println(ListaAtleti);
-    	FinestraPrincipale = new MainWindow(this, nome, cognome,id,ListaAtleti);
+    	FinestraPrincipale = new MainWindow(this, nome, cognome,id);
   		FinestraPrincipale.setVisible(true);	
   		
   	  }   
@@ -147,9 +147,15 @@ public class Controller {
 	  return c;
       }
       public ArrayList<Contratto> RichiamaIntroitiAtleta(int id){
-	    ArrayList Introiti = new ArrayList();
+	    ArrayList<Contratto> Introiti = new ArrayList();
 	    Introiti = ProcuratoreDAO.getIntroitiAtleta(id);
         return Introiti;
+      }
+      
+      public ArrayList<Atleta> RichiamaListaAtleti(int id) throws SQLException{
+    	  ArrayList<Atleta> Atleti = new ArrayList();
+    	  Atleti = ProcuratoreDAO.getAtletaByProcuratore(id);
+    	  return Atleti;
       }
 
 

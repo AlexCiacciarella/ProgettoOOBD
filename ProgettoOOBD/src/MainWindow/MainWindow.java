@@ -34,6 +34,8 @@ import javax.swing.JToolBar;
 import javax.swing.ListModel;
 
 import java.awt.Button;
+import java.awt.Component;
+
 import javax.swing.JScrollBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.AbstractListModel;
@@ -48,20 +50,14 @@ public class MainWindow extends JFrame {
 	private JList AtletaList = null;
 	private DefaultListModel ListModel = null;
     private Controller Controller;
-    private ArrayList<Atleta> ListaAtleti;
-    private ArrayList<Contratto> ListaContratti;
-	private ArrayList<Contratto> ListaIntroiti;
 	
     //costruttore
-	public MainWindow(Controller temp,String nome, String cognome,int id, ArrayList<Atleta> lista){
+	public MainWindow(Controller temp,String nome, String cognome,int id){
 
-		ListaAtleti = lista;
 		Controller = temp;
 		Nome = nome;
 		Cognome = cognome;
 		ID = id;
-
-		ListaAtleti = lista;
 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,16 +84,17 @@ public class MainWindow extends JFrame {
 		AtletaList.setFont(new Font("Arial", Font.PLAIN, 14));
 		scrollPane.setViewportView(AtletaList);
 		ListModel = new DefaultListModel();
-	    for(int i=0;i<ListaAtleti.size();i++) {
-	    	ListModel.addElement(ListaAtleti.get(i).toString());
-	    }
+	    try {
+			ListaAtleti(id);
+		} catch (SQLException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		}
 		AtletaList.setModel(ListModel);
 		
 		JButton BottoneContratti = new JButton("Visualizza tutti i Contratti");
 		BottoneContratti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListModel.removeAllElements();
-				AtletaList.setModel(ListModel);
 				try {
 					RiempiLista(ID);
 				} catch (SQLException e1) {
@@ -112,8 +109,6 @@ public class MainWindow extends JFrame {
 		JButton Sorgenti_Introito_Button = new JButton("Mostra sorgenti introito giocatori");
 		Sorgenti_Introito_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				ListModel.removeAllElements();
-				AtletaList.setModel(ListModel);
 				try {
 					IntroitiAtleta(id);
 				} catch (SQLException e2) {
@@ -129,8 +124,6 @@ public class MainWindow extends JFrame {
 		JButton btnNewButton = new JButton("Ottieni Atleta pi\u00F9 Redditizio");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListModel.removeAllElements();
-				AtletaList.setModel(ListModel);
 				try {
 					AtletaRedditizio(id);
 				} catch (SQLException e1) {
@@ -146,8 +139,6 @@ public class MainWindow extends JFrame {
 		JButton btnNewButton_1 = new JButton("Ottieni Club Pi\u00F9 Redditizio");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListModel.removeAllElements();
-				AtletaList.setModel(ListModel);
 				try {
 					ClubRedditizio(id);
 				} catch (SQLException e1) {
@@ -162,11 +153,12 @@ public class MainWindow extends JFrame {
 		JButton MostraAtleti = new JButton("Mostra tutti gli atleti");
 		MostraAtleti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListModel = new DefaultListModel();
-			    for(int i=0;i<ListaAtleti.size();i++) {
-			    	ListModel.addElement(ListaAtleti.get(i).toString());
-			    }
-				AtletaList.setModel(ListModel);
+				try {
+					ListaAtleti(id);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		MostraAtleti.setFont(new Font("Arial", Font.BOLD, 14));
@@ -177,30 +169,42 @@ public class MainWindow extends JFrame {
 	
 	//metodi
 	public void RiempiLista(int id) throws SQLException {
-		ListaContratti = Controller.RichiamaListaContratti(id);
+		ListModel.removeAllElements();
+		AtletaList.setModel(ListModel);
+		ArrayList<Contratto> ListaContratti = Controller.RichiamaListaContratti(id);
 		for(int i=0;i<ListaContratti.size();i++) {
 	    	ListModel.addElement(ListaContratti.get(i).toString());
 	    }
 		AtletaList.setModel(ListModel);
 	}
 	public void AtletaRedditizio(int id) throws SQLException{
-		Contratto c ;
-		c = Controller.RichiamaAtletaPiùRedditizio(id);
-		ListModel.addElement(c.toString());
+		ListModel.removeAllElements();
+		AtletaList.setModel(ListModel);
+		ListModel.addElement(Controller.RichiamaAtletaPiùRedditizio(id).toString());
 		AtletaList.setModel(ListModel);
 	}
 	public void ClubRedditizio(int id) throws SQLException{
-		Contratto c;
-		c = Controller.RichiamaClubPiùRedditizio(id);
-		ListModel.addElement(c.toString2());
+		ListModel.removeAllElements();
+		AtletaList.setModel(ListModel);
+		ListModel.addElement(Controller.RichiamaClubPiùRedditizio(id).toString2());
 		AtletaList.setModel(ListModel);
 	}
 	public void IntroitiAtleta(int id) throws SQLException{
-		 ListaIntroiti = Controller.RichiamaIntroitiAtleta(id); 
-			for(int i=0;i<ListaIntroiti.size();i++) {
-		    	ListModel.addElement(ListaIntroiti.get(i).toString3());
+		 ListModel.removeAllElements();
+		 AtletaList.setModel(ListModel); 
+			for(int i=0;i<Controller.RichiamaIntroitiAtleta(id).size();i++) {
+		    	ListModel.addElement(Controller.RichiamaIntroitiAtleta(id).get(i).toString3());
 		    }
 			AtletaList.setModel(ListModel);
+	}
+	
+	public void ListaAtleti(int id) throws SQLException{
+		ListModel.removeAllElements();
+		AtletaList.setModel(ListModel);
+		for(int i=0;i<Controller.RichiamaListaAtleti(id).size();i++) {
+	    	ListModel.addElement(Controller.RichiamaListaAtleti(id).get(i).toString());
+	    }
+		AtletaList.setModel(ListModel);
 	}
 }
 
