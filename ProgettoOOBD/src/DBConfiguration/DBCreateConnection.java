@@ -22,7 +22,7 @@ public class DBCreateConnection {
 		Controllo = false;
 		try {
 			Class.forName("org.postgresql.Driver");
-			//Ottenimento di una connessione
+		//Ottenimento di una connessione
 			Connessione = DriverManager.getConnection(Url);
 			System.out.println("Connessione stabilita");
 			Controllo = true;

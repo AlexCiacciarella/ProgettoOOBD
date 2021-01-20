@@ -34,14 +34,12 @@ public class ProcuratoreDAOPostgresImplem implements ProcuratoreDAO {
 																	+"from atleta natural join contratto join procuratore on atleta.id_procuratore = procuratore.id_procuratore "
 																	+"where procuratore.id_procuratore = ?");
 			getContrattiPS.setInt(1, ID);
-			Statement st = conn.createStatement();
 			ResultSet rs = getContrattiPS.executeQuery();
 			while(rs.next())
 			{
 				Contratto c = new Contratto(rs.getString("nome"), rs.getString("cognome"),rs.getInt("durata"), rs.getDouble("guadagno"),rs.getString("tipocontratto"), rs.getString("id_atleta"));
 				ListaContratti.add(c);
 			}
-			st.close();
 			rs.close();
 		} catch (SQLException e) {
 			System.out.println("C'è stato un errore nel reperire le liste dei contratti : "+ e);
@@ -66,7 +64,7 @@ public class ProcuratoreDAOPostgresImplem implements ProcuratoreDAO {
 		} catch (SQLException e) {
 			System.out.println("Non è stato possibile ottenere i contratti degli atleti : "+e);
 		}
-		return null;
+		return ContrattiAtleta;
 	}
 	@Override
 	public ArrayList getIntroitiAtleta(int id) {
@@ -89,7 +87,7 @@ public class ProcuratoreDAOPostgresImplem implements ProcuratoreDAO {
 		} catch (SQLException e) {
 			System.out.println("Non è stato possibile ottenere le informazioni sugli introiti dell'atleta: " + e);
 		} 
-		return null;
+		return Introiti;
 	 }
 	@Override
 	public Contratto getClubPiùRedditizio(int id) {
@@ -108,7 +106,7 @@ public class ProcuratoreDAOPostgresImplem implements ProcuratoreDAO {
 		} catch (SQLException e) {
 			System.out.println("Non è stato possibile trovare il club più redditizio : "+ e);
 		}
-		return null;
+		return c;
 	 }
 	public ArrayList<Atleta> getAtletaByProcuratore(int id_proc) throws SQLException {
 		getAtletaByProcuratorePS = conn.prepareStatement("SELECT * FROM atleta WHERE id_procuratore = ? ");
@@ -138,7 +136,7 @@ public class ProcuratoreDAOPostgresImplem implements ProcuratoreDAO {
 		} catch (SQLException e) {
 			System.out.println("Non è stato possibile trovare l'atleta più redditizio : "+ e);
 		}
-		return null;
+		return c;
     }
 
 }

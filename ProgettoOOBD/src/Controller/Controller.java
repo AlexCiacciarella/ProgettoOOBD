@@ -43,7 +43,6 @@ public class Controller {
       
       //metodi
 	  public void MainWindowSpawn(String nome, String cognome,int id) throws SQLException{
-    	ProcuratoreDAO = new ProcuratoreDAOPostgresImplem(this.connessione,this);
     	ArrayList<Atleta> ListaAtleti = new ArrayList<Atleta>();
     	ProcuratoreDAO = new ProcuratoreDAOPostgresImplem(this.connessione,this);
     	ListaAtleti = ProcuratoreDAO.getAtletaByProcuratore(id);
