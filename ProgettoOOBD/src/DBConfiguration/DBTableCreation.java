@@ -10,7 +10,6 @@ import MainWindow.MainWindow;
 public class DBTableCreation {
 	//attributi
 	private Connection conn;
-	private DBCreateConnection dbconnection;
 	private Controller c;
     private boolean ProblemiCreazione = false;
     private boolean ProblemiVincoli = false;

@@ -43,7 +43,6 @@ import javax.swing.AbstractListModel;
 public class MainWindow extends JFrame {
 	//attributi
 	private int ID;
-	private LoginWindow LoginWindow;
 	private String Nome, Cognome;
 	private JPanel ContentPanel;
 	private JTextField WelcomeTextField;

@@ -23,7 +23,6 @@ import Controller.Controller;
 
 public class LoginWindow extends JFrame {
 	//attributi
-	private MainWindow driver;
 	private Controller Controller;
 	private JPanel MainContentPanel;
 	private JTextField ProcuratoreTextField;
