@@ -2,6 +2,8 @@ package Classi;
 
 import java.util.List;
 
+import Controller.Controller;
+
 public class Atleta {
 	//attributi
 	private double GettonePresenzaNazionale;
@@ -10,6 +12,7 @@ public class Atleta {
 	private String Cognome;
 	private double Stipendio;
 	private String id_atleta;
+	private List<Contratto> Contratti;
 	
 	//Costruttore
 	public Atleta(String nome, String cognome, double stipendio,String id_atleta, double gettonePresenzaNazionale) {

@@ -10,6 +10,7 @@ import javax.swing.*;
 import Caricamento.ConnessioneAlDatabase;
 import Classi.Atleta;
 import Classi.Contratto;
+import Classi.Procuratore;
 import DAOPostgresImplem.ProcuratoreDAOPostgresImplem;
 import DBConfiguration.DBCreateConnection;
 import DBConfiguration.DBTableCreation;
@@ -25,9 +26,10 @@ public class Controller {
      private DBCreateConnection connessionedb;
      private DBTableCreation Tablebuilder;
      private ProcuratoreDAOPostgresImplem ProcuratoreDAO;
-     private Contratto con;
+     private Contratto Con;
+     private Atleta Atl;
+     private Procuratore proc;
      
-      
       //main
       public static void main(String[] args) throws  SQLException {
     	  Controller c = new Controller();
@@ -155,7 +157,6 @@ public class Controller {
     	  Atleti = ProcuratoreDAO.getAtletaByProcuratore(id);
     	  return Atleti;
       }
-
       public void RichiamoLogOut() throws SQLException {
     	  CaricamentoToLogin();
       }

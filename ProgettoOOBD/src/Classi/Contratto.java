@@ -1,5 +1,7 @@
 package Classi;
 
+import Controller.Controller;
+
 public class Contratto {
 	//attributi
 	private int Durata;
@@ -8,7 +10,7 @@ public class Contratto {
 	private String TipoContratto;
 	private String Id_atleta;
 	private String Nome_Società;
-	
+	private Atleta Atleta;
 	
 	//costruttori
 	public Contratto(String nome, String cognome,int durata, double guadagno, String tipocontratto, String id_atleta) {
